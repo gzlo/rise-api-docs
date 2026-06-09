@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auth — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Auth
+    </nav>
+
+    <h1>Auth <span class="badge">3 endpoints</span></h1>
+    <p></p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/auth/me</code></td>
+            <td>GET /api/v1/me Retorna los datos del usuario autenticado.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/auth/me/permissions</code></td>
+            <td>GET /api/v1/me/permissions Retorna los permisos efectivos del usuario.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/auth/session</code></td>
+            <td>POST /api/v1/auth/session Token exchange: recibe un API key en el body, valida que tenga auth_mode=exchange, y retorna un session token de uso temporal. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;rise_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;rise_sess_...&quot;, &quot;expires_in&quot;: 1800}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="auth-me">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/auth/me</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/me Retorna los datos del usuario autenticado.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>auth:me</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/auth/me \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="auth-permissions">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/auth/me/permissions</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/me/permissions Retorna los permisos efectivos del usuario.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>auth:me</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/auth/me/permissions \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="auth-session">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/auth/session</code>
+        </div>
+        <p class="endpoint-desc">POST /api/v1/auth/session Token exchange: recibe un API key en el body, valida que tenga auth_mode=exchange, y retorna un session token de uso temporal. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;rise_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;rise_sess_...&quot;, &quot;expires_in&quot;: 1800}}</p>
+
+        
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/auth/session \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

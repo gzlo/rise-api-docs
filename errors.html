@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Codes — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="active">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Error Codes
+    </nav>
+
+    <h1>Error Codes</h1>
+    <p>All API errors follow a consistent JSON format:</p>
+    <pre><code class="language-json">{
+  "success": false,
+  "error": {
+    "code": "error_code",
+    "message": "Human-readable error description"
+  }
+}</code></pre>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>HTTP Status</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+                  <tr>
+            <td><code>unauthorized</code></td>
+            <td><span class="status-code">401</span></td>
+            <td>Missing or invalid Bearer token.</td>
+          </tr>
+          <tr>
+            <td><code>forbidden</code></td>
+            <td><span class="status-code">403</span></td>
+            <td>Token does not have the required scope, or user lacks permissions.</td>
+          </tr>
+          <tr>
+            <td><code>not_found</code></td>
+            <td><span class="status-code">404</span></td>
+            <td>The requested resource does not exist.</td>
+          </tr>
+          <tr>
+            <td><code>validation_error</code></td>
+            <td><span class="status-code">422</span></td>
+            <td>Invalid input data. Missing required fields or format errors.</td>
+          </tr>
+          <tr>
+            <td><code>rate_limited</code></td>
+            <td><span class="status-code">429</span></td>
+            <td>Too many requests. Retry after 60 seconds.</td>
+          </tr>
+          <tr>
+            <td><code>payload_too_large</code></td>
+            <td><span class="status-code">413</span></td>
+            <td>Request body exceeds the maximum size (1MB).</td>
+          </tr>
+          <tr>
+            <td><code>unsupported_media_type</code></td>
+            <td><span class="status-code">415</span></td>
+            <td>Content-Type must be application/json.</td>
+          </tr>
+          <tr>
+            <td><code>internal_error</code></td>
+            <td><span class="status-code">500</span></td>
+            <td>Unexpected server error. Check server logs.</td>
+          </tr>
+          <tr>
+            <td><code>invalid_json</code></td>
+            <td><span class="status-code">400</span></td>
+            <td>Request body is not valid JSON.</td>
+          </tr>
+          <tr>
+            <td><code>upload_error</code></td>
+            <td><span class="status-code">500</span></td>
+            <td>File upload failed.</td>
+          </tr>
+          <tr>
+            <td><code>invalid_file_type</code></td>
+            <td><span class="status-code">415</span></td>
+            <td>File type is not allowed.</td>
+          </tr>
+          <tr>
+            <td><code>file_too_large</code></td>
+            <td><span class="status-code">413</span></td>
+            <td>File exceeds the maximum allowed size.</td>
+          </tr>
+
+      </tbody>
+    </table>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

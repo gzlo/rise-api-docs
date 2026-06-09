@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Tickets
+    </nav>
+
+    <h1>Tickets <span class="badge">10 endpoints</span></h1>
+    <p></p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tickets</code></td>
+            <td>Index tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tickets/{id}</code></td>
+            <td>Show tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tickets</code></td>
+            <td>Create tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/tickets/{id}</code></td>
+            <td>Update tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/tickets/{id}</code></td>
+            <td>Delete tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tickets/{id}/comments</code></td>
+            <td>Comments tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tickets/{id}/comments</code></td>
+            <td>AddComment tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/tickets/{id}/status</code></td>
+            <td>UpdateStatus tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tickets/{id}/assign</code></td>
+            <td>Assign tickets</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tickets/{id}/merge</code></td>
+            <td>Merge tickets</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="tickets-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tickets</code>
+        </div>
+        <p class="endpoint-desc">Index tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+              <tr>
+                <td><code>ticket_type_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by ticket type id</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by assigned to</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by search</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tickets \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="tickets-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tickets/{id}</code>
+        </div>
+        <p class="endpoint-desc">Show tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tickets/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tickets-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tickets</code>
+        </div>
+        <p class="endpoint-desc">Create tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:create</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>title</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Title or name of the resource</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Client ID</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Project ID</td>
+              </tr>
+              <tr>
+                <td><code>ticket_type_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>User ID assigned</td>
+              </tr>
+              <tr>
+                <td><code>requested_by_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Comma-separated labels</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tickets \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Example Resource",
+    "client_id": 1,
+    "project_id": 1,
+    "ticket_type_id": 1,
+    "assigned_to": 1,
+    "requested_by_id": 1,
+    "labels": "important,urgent"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="tickets-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/tickets/{id}</code>
+        </div>
+        <p class="endpoint-desc">Update tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:update</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>title</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Title or name of the resource</td>
+              </tr>
+              <tr>
+                <td><code>ticket_type_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>User ID assigned</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Project ID</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Comma-separated labels</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/tickets/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Example Resource",
+    "ticket_type_id": 1,
+    "assigned_to": 1,
+    "project_id": 1,
+    "labels": "important,urgent"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, assigned_to</p>
+      </div>
+      <div class="endpoint-detail" id="tickets-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/tickets/{id}</code>
+        </div>
+        <p class="endpoint-desc">Delete tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/tickets/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, assigned_to</p>
+      </div>
+      <div class="endpoint-detail" id="tickets-comments">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tickets/{id}/comments</code>
+        </div>
+        <p class="endpoint-desc">Comments tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tickets/{id}/comments \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tickets-addComment">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tickets/{id}/comments</code>
+        </div>
+        <p class="endpoint-desc">AddComment tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:comment</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tickets/{id}/comments \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tickets-updateStatus">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/tickets/{id}/status</code>
+        </div>
+        <p class="endpoint-desc">UpdateStatus tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/tickets/{id}/status \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, assigned_to</p>
+      </div>
+      <div class="endpoint-detail" id="tickets-assign">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tickets/{id}/assign</code>
+        </div>
+        <p class="endpoint-desc">Assign tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:assign</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tickets/{id}/assign \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+      <div class="endpoint-detail" id="tickets-merge">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tickets/{id}/merge</code>
+        </div>
+        <p class="endpoint-desc">Merge tickets</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tickets:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tickets/{id}/merge \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

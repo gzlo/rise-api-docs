@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Todo
+    </nav>
+
+    <h1>Todo <span class="badge">6 endpoints</span></h1>
+    <p>Controlador de tareas personales (to-do list).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/todo</code></td>
+            <td>Lista tareas personales con filtros.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/todo/{id}</code></td>
+            <td>Muestra una tarea personal especifica.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/todo</code></td>
+            <td>Crea una nueva tarea personal.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/todo/{id}</code></td>
+            <td>Actualiza una tarea personal.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/todo/{id}</code></td>
+            <td>Elimina una tarea personal (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/todo/{id}/toggle</code></td>
+            <td>Alterna el estado de una tarea personal (completado/pendiente).</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="todo-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/todo</code>
+        </div>
+        <p class="endpoint-desc">Lista tareas personales con filtros.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>todo:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/todo \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="todo-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/todo/{id}</code>
+        </div>
+        <p class="endpoint-desc">Muestra una tarea personal especifica.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>todo:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/todo/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="todo-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/todo</code>
+        </div>
+        <p class="endpoint-desc">Crea una nueva tarea personal.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>todo:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/todo \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "field": "value"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="todo-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/todo/{id}</code>
+        </div>
+        <p class="endpoint-desc">Actualiza una tarea personal.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>todo:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/todo/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="todo-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/todo/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina una tarea personal (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>todo:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/todo/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="todo-toggle">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/todo/{id}/toggle</code>
+        </div>
+        <p class="endpoint-desc">Alterna el estado de una tarea personal (completado/pendiente).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>todo:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/todo/{id}/toggle \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

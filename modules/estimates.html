@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimates — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Estimates
+    </nav>
+
+    <h1>Estimates <span class="badge">12 endpoints</span></h1>
+    <p>Controlador de presupuestos (estimates).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/estimates</code></td>
+            <td>Lista presupuestos con filtros opcionales.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/estimates/{id}</code></td>
+            <td>Muestra un presupuesto específico.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/estimates</code></td>
+            <td>Crea un nuevo presupuesto.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/estimates/{id}</code></td>
+            <td>Actualiza un presupuesto existente.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/estimates/{id}</code></td>
+            <td>Elimina un presupuesto (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/estimates/{id}/items</code></td>
+            <td>Lista los ítems de un presupuesto.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/estimates/{id}/items</code></td>
+            <td>Agrega un ítem al presupuesto.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/estimates/{id}/comments</code></td>
+            <td>Lista los comentarios de un presupuesto.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/estimates/{id}/comments</code></td>
+            <td>Agrega un comentario al presupuesto.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/estimates/{id}/status</code></td>
+            <td>Actualiza el estado de un presupuesto.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/estimates/requests</code></td>
+            <td>Lista las solicitudes de presupuesto (estimate requests).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/estimates/requests</code></td>
+            <td>Crea una nueva solicitud de presupuesto.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="estimates-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/estimates</code>
+        </div>
+        <p class="endpoint-desc">Lista presupuestos con filtros opcionales.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+              <tr>
+                <td><code>start_date</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by start date</td>
+              </tr>
+              <tr>
+                <td><code>end_date</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by end date</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by search</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/estimates \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="estimates-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/estimates/{id}</code>
+        </div>
+        <p class="endpoint-desc">Muestra un presupuesto específico.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/estimates/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="estimates-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/estimates</code>
+        </div>
+        <p class="endpoint-desc">Crea un nuevo presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/estimates \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "field": "value"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="estimates-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/estimates/{id}</code>
+        </div>
+        <p class="endpoint-desc">Actualiza un presupuesto existente.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:update</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Client ID</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Project ID</td>
+              </tr>
+              <tr>
+                <td><code>estimate_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>valid_until</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>tax_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Tax rate ID</td>
+              </tr>
+              <tr>
+                <td><code>tax_id2</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Secondary tax rate ID</td>
+              </tr>
+              <tr>
+                <td><code>discount_amount</code></td>
+                <td><span class="type-badge">currency</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Discount amount</td>
+              </tr>
+              <tr>
+                <td><code>discount_amount_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>discount_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Discount type (after_tax / before_tax)</td>
+              </tr>
+              <tr>
+                <td><code>note</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Additional notes or comments</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Status value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/estimates/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_id": 1,
+    "project_id": 1,
+    "estimate_date": "2026-06-09",
+    "valid_until": "2026-06-09",
+    "tax_id": 1,
+    "tax_id2": 0,
+    "discount_amount": 0,
+    "discount_amount_type": "percentage",
+    "discount_type": "after_tax",
+    "note": "Optional note about this item",
+    "status": "active"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p><p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+      <div class="endpoint-detail" id="estimates-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/estimates/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina un presupuesto (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/estimates/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+      <div class="endpoint-detail" id="estimates-items">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/estimates/{id}/items</code>
+        </div>
+        <p class="endpoint-desc">Lista los ítems de un presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/estimates/{id}/items \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="estimates-addItem">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/estimates/{id}/items</code>
+        </div>
+        <p class="endpoint-desc">Agrega un ítem al presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/estimates/{id}/items \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="estimates-comments">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/estimates/{id}/comments</code>
+        </div>
+        <p class="endpoint-desc">Lista los comentarios de un presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/estimates/{id}/comments \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="estimates-addComment">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/estimates/{id}/comments</code>
+        </div>
+        <p class="endpoint-desc">Agrega un comentario al presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:comment</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/estimates/{id}/comments \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="estimates-updateStatus">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/estimates/{id}/status</code>
+        </div>
+        <p class="endpoint-desc">Actualiza el estado de un presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/estimates/{id}/status \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="estimates-requests">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/estimates/requests</code>
+        </div>
+        <p class="endpoint-desc">Lista las solicitudes de presupuesto (estimate requests).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by assigned to</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/estimates/requests \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="estimates-createRequest">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/estimates/requests</code>
+        </div>
+        <p class="endpoint-desc">Crea una nueva solicitud de presupuesto.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>estimates:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/estimates/requests \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

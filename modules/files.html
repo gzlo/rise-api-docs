@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Files — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Files
+    </nav>
+
+    <h1>Files <span class="badge">9 endpoints</span></h1>
+    <p>Controlador de archivos y carpetas (file manager).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files</code></td>
+            <td>Lista archivos con filtros opcionales.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/{id}</code></td>
+            <td>Muestra la metadata de un archivo especifico.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/{id}/download</code></td>
+            <td>Descarga un archivo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/files/upload</code></td>
+            <td>Sube un nuevo archivo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/files/{id}</code></td>
+            <td>Elimina un archivo (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/folders</code></td>
+            <td>GET /api/v1/folders Lista carpetas.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/files/folders</code></td>
+            <td>POST /api/v1/folders Crea una nueva carpeta.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/files/folders/{id}</code></td>
+            <td>PUT /api/v1/folders/{id} Actualiza una carpeta.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/files/folders/{id}</code></td>
+            <td>DELETE /api/v1/folders/{id} Elimina una carpeta (soft delete).</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="files-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files</code>
+        </div>
+        <p class="endpoint-desc">Lista archivos con filtros opcionales.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>folder_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by folder id</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+              <tr>
+                <td><code>user_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by user id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="files-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/{id}</code>
+        </div>
+        <p class="endpoint-desc">Muestra la metadata de un archivo especifico.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="files-download">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/{id}/download</code>
+        </div>
+        <p class="endpoint-desc">Descarga un archivo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/{id}/download \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="files-upload">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/files/upload</code>
+        </div>
+        <p class="endpoint-desc">Sube un nuevo archivo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:upload</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/files/upload \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="files-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/files/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina un archivo (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/files/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, user_id</p>
+      </div>
+      <div class="endpoint-detail" id="files-folders">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/folders</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/folders Lista carpetas.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>folder_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by folder id</td>
+              </tr>
+              <tr>
+                <td><code>context</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by context</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/folders \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="files-createFolder">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/files/folders</code>
+        </div>
+        <p class="endpoint-desc">POST /api/v1/folders Crea una nueva carpeta.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:upload</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/files/folders \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="files-updateFolder">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/files/folders/{id}</code>
+        </div>
+        <p class="endpoint-desc">PUT /api/v1/folders/{id} Actualiza una carpeta.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:upload</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/files/folders/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="files-deleteFolder">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/files/folders/{id}</code>
+        </div>
+        <p class="endpoint-desc">DELETE /api/v1/folders/{id} Elimina una carpeta (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/files/folders/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

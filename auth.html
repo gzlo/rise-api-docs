@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="active">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Authentication
+    </nav>
+
+    <h1>Authentication</h1>
+
+    <section>
+      <h2>Bearer Token</h2>
+      <p>All endpoints require a Bearer token in the <code>Authorization</code> header:</p>
+      <pre><code>Authorization: Bearer rise_abc123def456...</code></pre>
+      <p>Tokens are validated against the database using SHA-256 hashing. If the token is invalid, expired, or inactive, the API returns a <code>401 Unauthorized</code> response.</p>
+    </section>
+
+    <section>
+      <h2>Token Exchange (Session Tokens)</h2>
+      <p>For environments where storing a permanent API key is a security risk (e.g., client-side applications), you can use the token exchange flow:</p>
+      <ol>
+        <li>Generate an API key with <code>auth_mode = "exchange"</code></li>
+        <li>POST the key to <code>/api/v1/auth/session</code> to get a temporary session token</li>
+        <li>Use the session token as a Bearer token (expires in 30 minutes)</li>
+      </ol>
+      <pre><code>curl -X POST https://your-rise.com/api/v1/auth/session \
+  -H "Content-Type: application/json" \
+  -d '{"api_key": "rise_exchange_key..."}'
+
+Response:
+{"success": true, "data": {"session_token": "rise_sess_...", "expires_in": 1800}}</code></pre>
+    </section>
+
+    <section>
+      <h2>Scopes</h2>
+      <p>Each token has a set of scopes that define what it can do. Scopes follow the format:</p>
+      <table>
+        <thead>
+          <tr><th>Format</th><th>Example</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>{module}:{action}</code></td><td><code>tasks:read</code></td><td>Specific action on a module</td></tr>
+          <tr><td><code>{module}:*</code></td><td><code>tasks:*</code></td><td>All actions on a module</td></tr>
+          <tr><td><code>*</code></td><td><code>*</code></td><td>Full access (admin only)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Presets</h3>
+      <table>
+        <thead>
+          <tr><th>Preset</th><th>Scopes</th><th>Use Case</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>n8n_full_automation</code></td><td>15 scopes</td><td>Full n8n automation workflows</td></tr>
+          <tr><td><code>n8n_light</code></td><td>6 scopes</td><td>Basic n8n automations</td></tr>
+          <tr><td><code>mcp_full</code></td><td>22 scopes</td><td>MCP server with broad access</td></tr>
+          <tr><td><code>read_only_reporting</code></td><td>19 scopes</td><td>Dashboards and reports</td></tr>
+          <tr><td><code>client_portal</code></td><td>26 scopes</td><td>Client portal access</td></tr>
+          <tr><td><code>admin_full</code></td><td><code>*</code></td><td>Full administrative access</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Rate Limiting</h2>
+      <p>Rate limiting is enforced using a sliding window of 1 minute:</p>
+      <table>
+        <thead>
+          <tr><th>User Type</th><th>Requests per Minute</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Admin</td><td>300</td></tr>
+          <tr><td>Staff</td><td>60</td></tr>
+          <tr><td>Client</td><td>60</td></tr>
+        </tbody>
+      </table>
+      <p>When exceeded, the API returns <code>429 Rate limited</code>.</p>
+    </section>
+
+    <section>
+      <h2>Authorization Checks</h2>
+      <p>RISE API implements three levels of access control:</p>
+      <ul>
+        <li><strong>Scope check</strong> — The token must have the required scope for the endpoint</li>
+        <li><strong>Ownership check</strong> — Staff users can only access their own resources (configurable via <code>requireOwnership()</code>)</li>
+        <li><strong>Client restriction</strong> — Client users can only access resources belonging to their client account</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>CORS</h2>
+      <p>CORS headers are applied when origins are configured in <strong>Settings &rarr; API Keys &rarr; CORS Origins</strong>.</p>
+      <pre><code>Access-Control-Allow-Origin: https://your-app.com
+Access-Control-Allow-Headers: Authorization, Content-Type
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS</code></pre>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

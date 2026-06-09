@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Users
+    </nav>
+
+    <h1>Users <span class="badge">8 endpoints</span></h1>
+    <p>Controlador de miembros del equipo (staff).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/users</code></td>
+            <td>Lista los miembros del equipo (staff).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/users/{id}</code></td>
+            <td>Muestra un miembro del equipo específico.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/users</code></td>
+            <td>Crea un nuevo miembro del equipo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/users/{id}</code></td>
+            <td>Actualiza un miembro del equipo existente.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/users/{id}</code></td>
+            <td>Elimina un miembro del equipo (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/users/{id}/activate</code></td>
+            <td>Activa o desactiva un miembro del equipo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/users/{id}/job-info</code></td>
+            <td>Obtiene la información laboral de un miembro del equipo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/users/online</code></td>
+            <td>Lista los usuarios actualmente en línea (staff + client).</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="users-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/users</code>
+        </div>
+        <p class="endpoint-desc">Lista los miembros del equipo (staff).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by search</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/users \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/users/{id}</code>
+        </div>
+        <p class="endpoint-desc">Muestra un miembro del equipo específico.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/users/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/users</code>
+        </div>
+        <p class="endpoint-desc">Crea un nuevo miembro del equipo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:create</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>first_name</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>First name</td>
+              </tr>
+              <tr>
+                <td><code>last_name</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Last name</td>
+              </tr>
+              <tr>
+                <td><code>email</code></td>
+                <td><span class="type-badge">email</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Email address</td>
+              </tr>
+              <tr>
+                <td><code>phone</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Phone number</td>
+              </tr>
+              <tr>
+                <td><code>job_title</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>gender</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>language</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>note</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Additional notes or comments</td>
+              </tr>
+              <tr>
+                <td><code>skype</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>is_admin</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/users \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "user@example.com",
+    "phone": "+1234567890",
+    "job_title": "string_value",
+    "gender": "active",
+    "language": "string_value",
+    "note": "Optional note about this item",
+    "skype": "string_value",
+    "is_admin": 1
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/users/{id}</code>
+        </div>
+        <p class="endpoint-desc">Actualiza un miembro del equipo existente.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:update</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>first_name</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>First name</td>
+              </tr>
+              <tr>
+                <td><code>last_name</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Last name</td>
+              </tr>
+              <tr>
+                <td><code>email</code></td>
+                <td><span class="type-badge">email</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Email address</td>
+              </tr>
+              <tr>
+                <td><code>phone</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Phone number</td>
+              </tr>
+              <tr>
+                <td><code>job_title</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>gender</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Status value</td>
+              </tr>
+              <tr>
+                <td><code>language</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>note</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Additional notes or comments</td>
+              </tr>
+              <tr>
+                <td><code>skype</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>is_admin</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/users/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "user@example.com",
+    "phone": "+1234567890",
+    "job_title": "string_value",
+    "gender": "active",
+    "status": "active",
+    "language": "string_value",
+    "note": "Optional note about this item",
+    "skype": "string_value",
+    "is_admin": 1
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/users/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina un miembro del equipo (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/users/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-activate">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/users/{id}/activate</code>
+        </div>
+        <p class="endpoint-desc">Activa o desactiva un miembro del equipo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/users/{id}/activate \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-jobInfo">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/users/{id}/job-info</code>
+        </div>
+        <p class="endpoint-desc">Obtiene la información laboral de un miembro del equipo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:read</code>, <code>users:job-info</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/users/{id}/job-info \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="users-online">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/users/online</code>
+        </div>
+        <p class="endpoint-desc">Lista los usuarios actualmente en línea (staff + client).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>users:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/users/online \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

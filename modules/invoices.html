@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoices — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Invoices
+    </nav>
+
+    <h1>Invoices <span class="badge">10 endpoints</span></h1>
+    <p>Controlador de facturas (invoices).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/invoices</code></td>
+            <td>Lista facturas con filtros opcionales.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/invoices/{id}</code></td>
+            <td>Muestra una factura específica.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/invoices</code></td>
+            <td>Crea una nueva factura.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/invoices/{id}</code></td>
+            <td>Actualiza una factura existente.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/invoices/{id}</code></td>
+            <td>Elimina una factura (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/invoices/{id}/items</code></td>
+            <td>Lista los ítems de una factura.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/invoices/{id}/items</code></td>
+            <td>Agrega un ítem a la factura.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/invoices/{id}/payments</code></td>
+            <td>Lista los pagos de una factura.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/invoices/{id}/payments</code></td>
+            <td>Registra un pago a la factura.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/invoices/{id}/status</code></td>
+            <td>Actualiza el estado de una factura.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="invoices-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/invoices</code>
+        </div>
+        <p class="endpoint-desc">Lista facturas con filtros opcionales.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by project id</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+              <tr>
+                <td><code>start_date</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by start date</td>
+              </tr>
+              <tr>
+                <td><code>end_date</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by end date</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by search</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/invoices \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="invoices-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/invoices/{id}</code>
+        </div>
+        <p class="endpoint-desc">Muestra una factura específica.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/invoices/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="invoices-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/invoices</code>
+        </div>
+        <p class="endpoint-desc">Crea una nueva factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:create</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Client ID</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Project ID</td>
+              </tr>
+              <tr>
+                <td><code>bill_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Billing date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>due_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Due date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>tax_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Tax rate ID</td>
+              </tr>
+              <tr>
+                <td><code>tax_id2</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Secondary tax rate ID</td>
+              </tr>
+              <tr>
+                <td><code>discount_amount</code></td>
+                <td><span class="type-badge">currency</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Discount amount</td>
+              </tr>
+              <tr>
+                <td><code>discount_amount_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>discount_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Discount type (after_tax / before_tax)</td>
+              </tr>
+              <tr>
+                <td><code>recurring</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Whether recurring (1 = yes, 0 = no)</td>
+              </tr>
+              <tr>
+                <td><code>repeat_every</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Repeats every N units</td>
+              </tr>
+              <tr>
+                <td><code>repeat_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>no_of_cycles</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Number of repeat cycles</td>
+              </tr>
+              <tr>
+                <td><code>next_recurring_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>note</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Additional notes or comments</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Comma-separated labels</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Status value</td>
+              </tr>
+              <tr>
+                <td><code>files</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>File attachments metadata</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/invoices \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_id": 1,
+    "project_id": 1,
+    "bill_date": "2026-06-09",
+    "due_date": "2026-06-24",
+    "tax_id": 1,
+    "tax_id2": 0,
+    "discount_amount": 0,
+    "discount_amount_type": "percentage",
+    "discount_type": "after_tax",
+    "recurring": 0,
+    "repeat_every": 0,
+    "repeat_type": "active",
+    "no_of_cycles": 0,
+    "next_recurring_date": "2026-06-09",
+    "note": "Optional note about this item",
+    "labels": "important,urgent",
+    "status": "active",
+    "files": ""
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="invoices-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/invoices/{id}</code>
+        </div>
+        <p class="endpoint-desc">Actualiza una factura existente.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:update</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Client ID</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Project ID</td>
+              </tr>
+              <tr>
+                <td><code>bill_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Billing date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>due_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Due date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>tax_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Tax rate ID</td>
+              </tr>
+              <tr>
+                <td><code>tax_id2</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Secondary tax rate ID</td>
+              </tr>
+              <tr>
+                <td><code>discount_amount</code></td>
+                <td><span class="type-badge">currency</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Discount amount</td>
+              </tr>
+              <tr>
+                <td><code>discount_amount_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>discount_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Discount type (after_tax / before_tax)</td>
+              </tr>
+              <tr>
+                <td><code>recurring</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Whether recurring (1 = yes, 0 = no)</td>
+              </tr>
+              <tr>
+                <td><code>repeat_every</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Repeats every N units</td>
+              </tr>
+              <tr>
+                <td><code>repeat_type</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Enumeration value</td>
+              </tr>
+              <tr>
+                <td><code>no_of_cycles</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Number of repeat cycles</td>
+              </tr>
+              <tr>
+                <td><code>next_recurring_date</code></td>
+                <td><span class="type-badge">date</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>note</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Additional notes or comments</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Comma-separated labels</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">enum</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Status value</td>
+              </tr>
+              <tr>
+                <td><code>files</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>File attachments metadata</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/invoices/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_id": 1,
+    "project_id": 1,
+    "bill_date": "2026-06-09",
+    "due_date": "2026-06-24",
+    "tax_id": 1,
+    "tax_id2": 0,
+    "discount_amount": 0,
+    "discount_amount_type": "percentage",
+    "discount_type": "after_tax",
+    "recurring": 0,
+    "repeat_every": 0,
+    "repeat_type": "active",
+    "no_of_cycles": 0,
+    "next_recurring_date": "2026-06-09",
+    "note": "Optional note about this item",
+    "labels": "important,urgent",
+    "status": "active",
+    "files": ""
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p><p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+      <div class="endpoint-detail" id="invoices-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/invoices/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina una factura (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/invoices/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+      <div class="endpoint-detail" id="invoices-items">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/invoices/{id}/items</code>
+        </div>
+        <p class="endpoint-desc">Lista los ítems de una factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/invoices/{id}/items \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="invoices-addItem">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/invoices/{id}/items</code>
+        </div>
+        <p class="endpoint-desc">Agrega un ítem a la factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/invoices/{id}/items \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="invoices-payments">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/invoices/{id}/payments</code>
+        </div>
+        <p class="endpoint-desc">Lista los pagos de una factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/invoices/{id}/payments \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="invoices-addPayment">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/invoices/{id}/payments</code>
+        </div>
+        <p class="endpoint-desc">Registra un pago a la factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/invoices/{id}/payments \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="invoices-updateStatus">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/invoices/{id}/status</code>
+        </div>
+        <p class="endpoint-desc">Actualiza el estado de una factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/invoices/{id}/status \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Base — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Knowledge Base
+    </nav>
+
+    <h1>Knowledge Base <span class="badge">11 endpoints</span></h1>
+    <p>Controlador de la base de conocimiento (knowledge base).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/knowledge-base/categories</code></td>
+            <td>GET /api/v1/kb/categories Lista todas las categorias de la KB.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/knowledge-base/categories/{id}</code></td>
+            <td>GET /api/v1/kb/categories/{id} Muestra una categoria especifica.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/knowledge-base/categories</code></td>
+            <td>POST /api/v1/kb/categories Crea una nueva categoria.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/knowledge-base/categories/{id}</code></td>
+            <td>PUT /api/v1/kb/categories/{id} Actualiza una categoria.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/knowledge-base/categories/{id}</code></td>
+            <td>DELETE /api/v1/kb/categories/{id} Elimina una categoria (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/knowledge-base/articles</code></td>
+            <td>GET /api/v1/kb/articles Lista articulos de la KB con filtros.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/knowledge-base/articles/{id}</code></td>
+            <td>GET /api/v1/kb/articles/{id} Muestra un articulo especifico.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/knowledge-base/articles</code></td>
+            <td>POST /api/v1/kb/articles Crea un nuevo articulo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/knowledge-base/articles/{id}</code></td>
+            <td>PUT /api/v1/kb/articles/{id} Actualiza un articulo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/knowledge-base/articles/{id}</code></td>
+            <td>DELETE /api/v1/kb/articles/{id} Elimina un articulo (soft delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/knowledge-base/search</code></td>
+            <td>GET /api/v1/kb/search Busca articulos en la base de conocimiento.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="knowledge-base-categories">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/knowledge-base/categories</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/kb/categories Lista todas las categorias de la KB.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>type</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by type</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/knowledge-base/categories \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-showCategory">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/knowledge-base/categories/{id}</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/kb/categories/{id} Muestra una categoria especifica.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/knowledge-base/categories/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-createCategory">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/knowledge-base/categories</code>
+        </div>
+        <p class="endpoint-desc">POST /api/v1/kb/categories Crea una nueva categoria.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/knowledge-base/categories \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-updateCategory">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/knowledge-base/categories/{id}</code>
+        </div>
+        <p class="endpoint-desc">PUT /api/v1/kb/categories/{id} Actualiza una categoria.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/knowledge-base/categories/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-deleteCategory">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/knowledge-base/categories/{id}</code>
+        </div>
+        <p class="endpoint-desc">DELETE /api/v1/kb/categories/{id} Elimina una categoria (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/knowledge-base/categories/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-articles">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/knowledge-base/articles</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/kb/articles Lista articulos de la KB con filtros.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>category_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by category id</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+              <tr>
+                <td><code>type</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by type</td>
+              </tr>
+              <tr>
+                <td><code>label_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by label id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/knowledge-base/articles \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-showArticle">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/knowledge-base/articles/{id}</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/kb/articles/{id} Muestra un articulo especifico.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/knowledge-base/articles/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-createArticle">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/knowledge-base/articles</code>
+        </div>
+        <p class="endpoint-desc">POST /api/v1/kb/articles Crea un nuevo articulo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/knowledge-base/articles \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-updateArticle">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/knowledge-base/articles/{id}</code>
+        </div>
+        <p class="endpoint-desc">PUT /api/v1/kb/articles/{id} Actualiza un articulo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/knowledge-base/articles/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-deleteArticle">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/knowledge-base/articles/{id}</code>
+        </div>
+        <p class="endpoint-desc">DELETE /api/v1/kb/articles/{id} Elimina un articulo (soft delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/knowledge-base/articles/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="knowledge-base-search">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/knowledge-base/search</code>
+        </div>
+        <p class="endpoint-desc">GET /api/v1/kb/search Busca articulos en la base de conocimiento.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>kb:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>q</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by q</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/knowledge-base/search \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

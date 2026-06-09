@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webhooks — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Webhooks
+    </nav>
+
+    <h1>Webhooks <span class="badge">6 endpoints</span></h1>
+    <p>Controlador de webhooks (admin only).</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/webhooks</code></td>
+            <td>Lista todos los webhooks.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/webhooks/{id}</code></td>
+            <td>Muestra un webhook especifico.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/webhooks</code></td>
+            <td>Crea un nuevo webhook.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/webhooks/{id}</code></td>
+            <td>Actualiza un webhook existente.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/webhooks/{id}</code></td>
+            <td>Elimina un webhook (hard delete).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/webhooks/logs</code></td>
+            <td>Muestra los logs de ejecucion de un webhook.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="webhooks-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/webhooks</code>
+        </div>
+        <p class="endpoint-desc">Lista todos los webhooks.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>webhooks:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>event</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by event</td>
+              </tr>
+              <tr>
+                <td><code>is_active</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by is active</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/webhooks \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="webhooks-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/webhooks/{id}</code>
+        </div>
+        <p class="endpoint-desc">Muestra un webhook especifico.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>webhooks:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/webhooks/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="webhooks-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/webhooks</code>
+        </div>
+        <p class="endpoint-desc">Crea un nuevo webhook.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>webhooks:manage</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>name</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>event</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>target_url</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>secret</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>is_active</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/webhooks \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "string_value",
+    "event": "string_value",
+    "target_url": "string_value",
+    "secret": "string_value",
+    "is_active": 1
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="webhooks-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/webhooks/{id}</code>
+        </div>
+        <p class="endpoint-desc">Actualiza un webhook existente.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>webhooks:manage</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>name</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>event</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>target_url</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>secret</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+              <tr>
+                <td><code>is_active</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/webhooks/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "string_value",
+    "event": "string_value",
+    "target_url": "string_value",
+    "secret": "string_value",
+    "is_active": 1
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="webhooks-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/webhooks/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina un webhook (hard delete).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>webhooks:manage</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/webhooks/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="webhooks-logs">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/webhooks/logs</code>
+        </div>
+        <p class="endpoint-desc">Muestra los logs de ejecucion de un webhook.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>webhooks:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/webhooks/logs \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

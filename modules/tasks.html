@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Tasks
+    </nav>
+
+    <h1>Tasks <span class="badge">12 endpoints</span></h1>
+    <p></p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tasks</code></td>
+            <td>Index tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tasks/{id}</code></td>
+            <td>Show tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tasks</code></td>
+            <td>Create tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/tasks/{id}</code></td>
+            <td>Update tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/tasks/{id}</code></td>
+            <td>Delete tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/tasks/{id}/status</code></td>
+            <td>UpdateStatus tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tasks/{id}/comments</code></td>
+            <td>Comments tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tasks/{id}/comments</code></td>
+            <td>AddComment tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tasks/{id}/checklist</code></td>
+            <td>Checklist tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/tasks/{id}/subtasks</code></td>
+            <td>Subtasks tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tasks/{id}/subtasks</code></td>
+            <td>CreateSubtask tasks</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/tasks/{id}/copy</code></td>
+            <td>Copy tasks</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="tasks-index">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tasks</code>
+        </div>
+        <p class="endpoint-desc">Index tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by status</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by project id</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by assigned to</td>
+              </tr>
+              <tr>
+                <td><code>priority_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by priority id</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by search</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by labels</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tasks \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-show">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tasks/{id}</code>
+        </div>
+        <p class="endpoint-desc">Show tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tasks/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-create">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tasks</code>
+        </div>
+        <p class="endpoint-desc">Create tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:create</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>title</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Title or name of the resource</td>
+              </tr>
+              <tr>
+                <td><code>description</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Description text</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>User ID assigned</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Project ID</td>
+              </tr>
+              <tr>
+                <td><code>milestone_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>priority_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>status_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>points</code></td>
+                <td><span class="type-badge">float</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Numeric value</td>
+              </tr>
+              <tr>
+                <td><code>start_date</code></td>
+                <td><span class="type-badge">datetime</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Start date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>deadline</code></td>
+                <td><span class="type-badge">datetime</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Date and time (Y-m-d H:i:s)</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Comma-separated labels</td>
+              </tr>
+              <tr>
+                <td><code>collaborators</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tasks \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Example Resource",
+    "description": "A detailed description of the resource",
+    "assigned_to": 1,
+    "project_id": 1,
+    "milestone_id": 1,
+    "priority_id": 1,
+    "status_id": 1,
+    "points": 1,
+    "start_date": "2026-06-09",
+    "deadline": "2026-06-09 21:20:54",
+    "labels": "important,urgent",
+    "collaborators": "string_value"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Created", "data": {"id": 1}}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-update">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/tasks/{id}</code>
+        </div>
+        <p class="endpoint-desc">Update tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:update</code></p>
+
+        
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>title</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Title or name of the resource</td>
+              </tr>
+              <tr>
+                <td><code>description</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Description text</td>
+              </tr>
+              <tr>
+                <td><code>assigned_to</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>User ID assigned</td>
+              </tr>
+              <tr>
+                <td><code>milestone_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>priority_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>status_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>points</code></td>
+                <td><span class="type-badge">float</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Numeric value</td>
+              </tr>
+              <tr>
+                <td><code>start_date</code></td>
+                <td><span class="type-badge">datetime</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Start date (Y-m-d)</td>
+              </tr>
+              <tr>
+                <td><code>deadline</code></td>
+                <td><span class="type-badge">datetime</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Date and time (Y-m-d H:i:s)</td>
+              </tr>
+              <tr>
+                <td><code>labels</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Comma-separated labels</td>
+              </tr>
+              <tr>
+                <td><code>collaborators</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="optional-badge">Optional</span></td>
+                <td>Text value</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/tasks/{id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Example Resource",
+    "description": "A detailed description of the resource",
+    "assigned_to": 1,
+    "milestone_id": 1,
+    "priority_id": 1,
+    "status_id": 1,
+    "points": 1,
+    "start_date": "2026-06-09",
+    "deadline": "2026-06-09 21:20:54",
+    "labels": "important,urgent",
+    "collaborators": "string_value"
+}'</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, assigned_to</p>
+      </div>
+      <div class="endpoint-detail" id="tasks-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/tasks/{id}</code>
+        </div>
+        <p class="endpoint-desc">Delete tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/tasks/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, assigned_to</p>
+      </div>
+      <div class="endpoint-detail" id="tasks-updateStatus">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/tasks/{id}/status</code>
+        </div>
+        <p class="endpoint-desc">UpdateStatus tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:status</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/tasks/{id}/status \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by, assigned_to</p>
+      </div>
+      <div class="endpoint-detail" id="tasks-comments">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tasks/{id}/comments</code>
+        </div>
+        <p class="endpoint-desc">Comments tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:comment</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tasks/{id}/comments \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-addComment">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tasks/{id}/comments</code>
+        </div>
+        <p class="endpoint-desc">AddComment tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:comment</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tasks/{id}/comments \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-checklist">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tasks/{id}/checklist</code>
+        </div>
+        <p class="endpoint-desc">Checklist tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tasks/{id}/checklist \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-subtasks">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/tasks/{id}/subtasks</code>
+        </div>
+        <p class="endpoint-desc">Subtasks tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/tasks/{id}/subtasks \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-createSubtask">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tasks/{id}/subtasks</code>
+        </div>
+        <p class="endpoint-desc">CreateSubtask tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tasks/{id}/subtasks \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="tasks-copy">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/tasks/{id}/copy</code>
+        </div>
+        <p class="endpoint-desc">Copy tasks</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>tasks:create</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/tasks/{id}/copy \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>

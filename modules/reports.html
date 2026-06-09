@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports — RISE API</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">RISE API <span class="version">v1.1.24</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="">Home</a>
+        <a href="auth.html" class="">Auth</a>
+        <a href="errors.html" class="">Errors</a>
+        <a href="changelog.html" class="">Changelog</a>
+      </div>
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">&#9790;</button>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / Reports
+    </nav>
+
+    <h1>Reports <span class="badge">12 endpoints</span></h1>
+    <p>Controlador de reportes via queries.</p>
+
+    <section class="endpoints-list">
+      <h2>Endpoints</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/tasks</code></td>
+            <td>Reporte de tareas: totales por estado, prioridad, asignado.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/tickets</code></td>
+            <td>Reporte de tickets: totales por estado, tipo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/invoices</code></td>
+            <td>Reporte de facturas: totales por estado, periodo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/estimates</code></td>
+            <td>Reporte de presupuestos: totales por estado.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/projects</code></td>
+            <td>Reporte de proyectos: totales por estado, progreso.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/team-members-summary</code></td>
+            <td>Reporte resumen de miembros del equipo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/clients-summary</code></td>
+            <td>Reporte resumen de clientes.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/expenses</code></td>
+            <td>Reporte de gastos: totales por categoria, periodo.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/leaves</code></td>
+            <td>Reporte de ausencias: totales por tipo, estado.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/attendance</code></td>
+            <td>Reporte de asistencia: horas trabajadas por dia/mes.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/timesheets</code></td>
+            <td>Reporte de timesheets: horas por proyecto/usuario.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/reports/income-vs-expense</code></td>
+            <td>Reporte comparativo de ingresos vs gastos por periodo.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <section class="endpoints-details">
+      <h2>Details</h2>
+            <div class="endpoint-detail" id="reports-tasks">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/tasks</code>
+        </div>
+        <p class="endpoint-desc">Reporte de tareas: totales por estado, prioridad, asignado.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by project id</td>
+              </tr>
+              <tr>
+                <td><code>user_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by user id</td>
+              </tr>
+              <tr>
+                <td><code>group_by</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by group by</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/tasks \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-tickets">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/tickets</code>
+        </div>
+        <p class="endpoint-desc">Reporte de tickets: totales por estado, tipo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/tickets \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-invoices">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/invoices</code>
+        </div>
+        <p class="endpoint-desc">Reporte de facturas: totales por estado, periodo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/invoices \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-estimates">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/estimates</code>
+        </div>
+        <p class="endpoint-desc">Reporte de presupuestos: totales por estado.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/estimates \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-projects">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/projects</code>
+        </div>
+        <p class="endpoint-desc">Reporte de proyectos: totales por estado, progreso.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>client_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by client id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/projects \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-teamMembersSummary">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/team-members-summary</code>
+        </div>
+        <p class="endpoint-desc">Reporte resumen de miembros del equipo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/team-members-summary \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-clientsSummary">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/clients-summary</code>
+        </div>
+        <p class="endpoint-desc">Reporte resumen de clientes.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/clients-summary \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-expenses">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/expenses</code>
+        </div>
+        <p class="endpoint-desc">Reporte de gastos: totales por categoria, periodo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by project id</td>
+              </tr>
+              <tr>
+                <td><code>user_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by user id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/expenses \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-leaves">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/leaves</code>
+        </div>
+        <p class="endpoint-desc">Reporte de ausencias: totales por tipo, estado.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>user_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by user id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/leaves \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-attendance">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/attendance</code>
+        </div>
+        <p class="endpoint-desc">Reporte de asistencia: horas trabajadas por dia/mes.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>user_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by user id</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/attendance \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-timesheets">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/timesheets</code>
+        </div>
+        <p class="endpoint-desc">Reporte de timesheets: horas por proyecto/usuario.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+              <tr>
+                <td><code>project_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by project id</td>
+              </tr>
+              <tr>
+                <td><code>user_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by user id</td>
+              </tr>
+              <tr>
+                <td><code>group_by</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by group by</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/timesheets \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="reports-incomeVsExpense">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/reports/income-vs-expense</code>
+        </div>
+        <p class="endpoint-desc">Reporte comparativo de ingresos vs gastos por periodo.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>reports:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>date_from</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date from</td>
+              </tr>
+              <tr>
+                <td><code>date_to</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by date to</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/reports/income-vs-expense \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>RISE API v1.1.24 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </div>
+  </footer>
+  <script src="assets/search.js"></script>
+</body>
+</html>
