@@ -1,29 +1,22 @@
 /**
- * RISE API Documentation — Client-side Search
+ * RISE API Documentation — Client-side Search & Theme
  */
-
 (function () {
   'use strict';
 
-  const searchInput = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
+  var searchInput = document.getElementById('search-input');
+  var searchResults = document.getElementById('search-results');
 
   if (!searchInput || !searchResults) return;
 
-  let searchIndex = [];
-  let searchTimeout = null;
+  var searchIndex = [];
+  var searchTimeout = null;
 
-  // Load search index
   fetch('assets/search-index.json')
     .then(function (r) { return r.json(); })
-    .then(function (data) {
-      searchIndex = data;
-    })
-    .catch(function () {
-      // Silently fail — search just won't work
-    });
+    .then(function (data) { searchIndex = data; })
+    .catch(function () {});
 
-  // Fuzzy search helper
   function fuzzyMatch(text, query) {
     text = text.toLowerCase();
     query = query.toLowerCase();
@@ -47,20 +40,19 @@
 
     for (var i = 0; i < searchIndex.length; i++) {
       var item = searchIndex[i];
-      var match = fuzzyMatch(item.title, lowerQuery) ||
-                  fuzzyMatch(item.path, lowerQuery) ||
-                  fuzzyMatch(item.description, lowerQuery) ||
-                  fuzzyMatch(item.module, lowerQuery);
-      if (match) {
+      if (fuzzyMatch(item.title, lowerQuery) ||
+          fuzzyMatch(item.path, lowerQuery) ||
+          fuzzyMatch(item.description, lowerQuery) ||
+          fuzzyMatch(item.module, lowerQuery)) {
         results.push(item);
         if (results.length >= 20) break;
       }
     }
 
-    renderResults(results, query);
+    renderResults(results);
   }
 
-  function renderResults(results, query) {
+  function renderResults(results) {
     if (results.length === 0) {
       searchResults.innerHTML = '<div class="search-no-results">No endpoints found</div>';
       searchResults.classList.remove('hidden');
@@ -76,15 +68,14 @@
         '<div class="result-desc">' + escapeHtml(r.description) + '</div>' +
         '</a>';
     }
-
     searchResults.innerHTML = html;
     searchResults.classList.remove('hidden');
   }
 
   function escapeHtml(text) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(text));
-    return div.innerHTML;
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(text));
+    return d.innerHTML;
   }
 
   searchInput.addEventListener('input', function () {
@@ -105,9 +96,8 @@
     }
   });
 
-  // Close search on click outside
   document.addEventListener('click', function (e) {
-    if (!e.target.closest('.nav-search')) {
+    if (!e.target.closest('.sidebar-search')) {
       searchResults.classList.add('hidden');
     }
   });
@@ -116,33 +106,59 @@
 
   var themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
-    var savedTheme = localStorage.getItem('rise-api-theme') || 'light';
-    if (savedTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      themeToggle.innerHTML = '&#9788;';
+    var saved = localStorage.getItem('rise-api-docs-theme');
+    if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeToggle.innerHTML = '&#9790; Dark';
+    } else {
+      themeToggle.innerHTML = '&#9788; Light';
     }
 
     themeToggle.addEventListener('click', function () {
       var current = document.documentElement.getAttribute('data-theme');
-      if (current === 'dark') {
+      if (current === 'light') {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('rise-api-theme', 'light');
-        themeToggle.innerHTML = '&#9790;';
+        localStorage.setItem('rise-api-docs-theme', 'dark');
+        themeToggle.innerHTML = '&#9788; Light';
       } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('rise-api-theme', 'dark');
-        themeToggle.innerHTML = '&#9788;';
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('rise-api-docs-theme', 'light');
+        themeToggle.innerHTML = '&#9790; Dark';
       }
     });
   }
 
-  // ── Mobile menu toggle ──
+  // ── Mobile sidebar toggle ──
 
-  var menuBtn = document.getElementById('menu-btn');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      document.querySelector('.nav-links').classList.toggle('open');
+  var sidebarToggle = document.getElementById('sidebar-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var sidebarOverlay = document.getElementById('sidebar-overlay');
+
+  function closeSidebar() {
+    if (sidebar) sidebar.classList.remove('open');
+    if (sidebarOverlay) sidebarOverlay.style.display = 'none';
+  }
+
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', function () {
+      sidebar.classList.toggle('open');
+      if (sidebarOverlay) sidebarOverlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+    });
+
+    if (sidebarOverlay) {
+      sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeSidebar();
     });
   }
 
+  // Close search on Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      searchResults.classList.add('hidden');
+      searchInput.blur();
+    }
+  });
 })();
