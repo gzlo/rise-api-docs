@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Server — RISE API</title>
+  <base href="/rise-api-docs/">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html" class="sidebar-brand">
+      RISE API <span class="version">v1.1.28</span>
+    </a>
+  </div>
+  <div class="sidebar-search" style="position:relative">
+    <input type="text" id="search-input" placeholder="Search endpoints..." autocomplete="off">
+    <div id="search-results" class="search-results hidden"></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">General</div>
+                <a href="index.html" class="sidebar-link">
+            <span class="nav-icon">&#8962;</span> Home
+          </a>
+          <a href="auth.html" class="sidebar-link">
+            <span class="nav-icon">&#128274;</span> Authentication
+          </a>
+          <a href="errors.html" class="sidebar-link">
+            <span class="nav-icon">&#9888;</span> Error Codes
+          </a>
+          <a href="changelog.html" class="sidebar-link">
+            <span class="nav-icon">&#128197;</span> Changelog
+          </a>
+          <a href="mcp.html" class="sidebar-link active">
+            <span class="nav-icon">&#9881;</span> MCP Server
+          </a>
+
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Modules</div>
+                <a href="modules/announcements.html" class="sidebar-link">
+            Announcements
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/api-keys.html" class="sidebar-link">
+            Api Keys
+            <span class="ep-count">7</span>
+          </a>
+          <a href="modules/attendance.html" class="sidebar-link">
+            Attendance
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/auth.html" class="sidebar-link">
+            Auth
+            <span class="ep-count">3</span>
+          </a>
+          <a href="modules/clients.html" class="sidebar-link">
+            Clients
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/contacts.html" class="sidebar-link">
+            Contacts
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/contracts.html" class="sidebar-link">
+            Contracts
+            <span class="ep-count">7</span>
+          </a>
+          <a href="modules/custom-fields.html" class="sidebar-link">
+            Custom Fields
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/estimates.html" class="sidebar-link">
+            Estimates
+            <span class="ep-count">12</span>
+          </a>
+          <a href="modules/events.html" class="sidebar-link">
+            Events
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/expenses.html" class="sidebar-link">
+            Expenses
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/files.html" class="sidebar-link">
+            Files
+            <span class="ep-count">9</span>
+          </a>
+          <a href="modules/health.html" class="sidebar-link">
+            Health
+            <span class="ep-count">1</span>
+          </a>
+          <a href="modules/invoices.html" class="sidebar-link">
+            Invoices
+            <span class="ep-count">10</span>
+          </a>
+          <a href="modules/knowledge-base.html" class="sidebar-link">
+            Knowledge Base
+            <span class="ep-count">11</span>
+          </a>
+          <a href="modules/labels.html" class="sidebar-link">
+            Labels
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/leads.html" class="sidebar-link">
+            Leads
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/leaves.html" class="sidebar-link">
+            Leaves
+            <span class="ep-count">8</span>
+          </a>
+          <a href="modules/messages.html" class="sidebar-link">
+            Messages
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/notes.html" class="sidebar-link">
+            Notes
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/orders.html" class="sidebar-link">
+            Orders
+            <span class="ep-count">7</span>
+          </a>
+          <a href="modules/projects.html" class="sidebar-link">
+            Projects
+            <span class="ep-count">13</span>
+          </a>
+          <a href="modules/proposals.html" class="sidebar-link">
+            Proposals
+            <span class="ep-count">9</span>
+          </a>
+          <a href="modules/reminders.html" class="sidebar-link">
+            Reminders
+            <span class="ep-count">4</span>
+          </a>
+          <a href="modules/reports.html" class="sidebar-link">
+            Reports
+            <span class="ep-count">12</span>
+          </a>
+          <a href="modules/roles.html" class="sidebar-link">
+            Roles
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/settings.html" class="sidebar-link">
+            Settings
+            <span class="ep-count">61</span>
+          </a>
+          <a href="modules/subscriptions.html" class="sidebar-link">
+            Subscriptions
+            <span class="ep-count">7</span>
+          </a>
+          <a href="modules/tasks.html" class="sidebar-link">
+            Tasks
+            <span class="ep-count">12</span>
+          </a>
+          <a href="modules/taxonomies.html" class="sidebar-link">
+            Taxonomies
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/teams.html" class="sidebar-link">
+            Teams
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/templates.html" class="sidebar-link">
+            Templates
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/tickets.html" class="sidebar-link">
+            Tickets
+            <span class="ep-count">10</span>
+          </a>
+          <a href="modules/timeline.html" class="sidebar-link">
+            Timeline
+            <span class="ep-count">5</span>
+          </a>
+          <a href="modules/todo.html" class="sidebar-link">
+            Todo
+            <span class="ep-count">6</span>
+          </a>
+          <a href="modules/users.html" class="sidebar-link">
+            Users
+            <span class="ep-count">8</span>
+          </a>
+          <a href="modules/webhooks.html" class="sidebar-link">
+            Webhooks
+            <span class="ep-count">6</span>
+          </a>
+
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button id="theme-toggle" class="theme-btn">&#9788; Light</button>
+  </div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<button class="sidebar-toggle" id="sidebar-toggle">&#9776;</button>
+
+  <div class="main-content">
+    <div class="content">
+    <nav class="breadcrumbs">
+      <a href="index.html">Home</a> / MCP Server
+    </nav>
+
+    <h1>RISE MCP Server <span class="badge">v1.1.0</span></h1>
+    <p class="subtitle">
+      <a href="https://www.npmjs.com/package/rise-mcp" target="_blank">rise-mcp</a> —
+      Model Context Protocol server for RISE CRM. Connect your RISE instance with AI assistants
+      like Claude, Cursor, Windsurf, GitHub Copilot, Continue.dev, and OpenCode.
+    </p>
+
+    <section>
+      <h2>Installation</h2>
+      <pre><code>npm install -g rise-mcp</code></pre>
+      <p>Or run directly without installing:</p>
+      <pre><code>npx rise-mcp</code></pre>
+      <p>Requires <strong>Node.js >= 20</strong> and a RISE CRM instance with the Rise API module activated.</p>
+    </section>
+
+    <section>
+      <h2>Configuration</h2>
+      <p>Set these environment variables before starting the server:</p>
+      <table>
+        <thead>
+          <tr><th>Variable</th><th>Description</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>RISE_API_URL</code></td>
+            <td>Base URL of your RISE CRM instance</td>
+            <td><code>https://tu-empresa.risecrm.com</code></td>
+          </tr>
+          <tr>
+            <td><code>RISE_API_KEY</code></td>
+            <td>API Key generated in RISE CRM</td>
+            <td><code>sk-abc123...</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>You can also create a <code>.env</code> file in the working directory with these variables.</p>
+    </section>
+
+    <section>
+      <h2>Available Tools (36 tools, 12 modules)</h2>
+
+      <h3>Auth</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>me</code></td><td>Datos del usuario autenticado y sus scopes</td></tr>
+          <tr><td><code>my_permissions</code></td><td>Permisos efectivos del usuario</td></tr>
+        </tbody>
+      </table>
+
+      <h3>CRM</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>clients</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>contacts</code></td></tr>
+          <tr><td><code>contacts</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>permissions</code></td></tr>
+          <tr><td><code>leads</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>convert</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Projects & Tasks</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>projects</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>members</code>, <code>add_member</code>, <code>remove_member</code>, <code>comments</code>, <code>files</code>, <code>milestones</code></td></tr>
+          <tr><td><code>tasks</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>comments</code>, <code>update_status</code>, <code>checklist</code>, <code>subtasks</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Financial</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>invoices</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>items</code>, <code>payments</code></td></tr>
+          <tr><td><code>estimates</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>items</code>, <code>comments</code>, <code>update_status</code></td></tr>
+          <tr><td><code>expenses</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code></td></tr>
+          <tr><td><code>subscriptions</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>items</code></td></tr>
+          <tr><td><code>orders</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>items</code></td></tr>
+          <tr><td><code>proposals</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>items</code>, <code>comments</code></td></tr>
+          <tr><td><code>contracts</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>items</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Tickets & Support</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>tickets</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>comments</code>, <code>update_status</code>, <code>assign</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>HR</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>users</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>activate</code>, <code>job_info</code>, <code>online</code></td></tr>
+          <tr><td><code>attendance</code></td><td><code>list</code>, <code>clock_in</code>, <code>clock_out</code>, <code>status</code>, <code>summary</code>, <code>members</code></td></tr>
+          <tr><td><code>leaves</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>approve</code>, <code>reject</code>, <code>summary</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Content</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>notes</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>categories</code></td></tr>
+          <tr><td><code>announcements</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code></td></tr>
+          <tr><td><code>events</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code></td></tr>
+          <tr><td><code>timeline</code></td><td><code>list</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>like</code></td></tr>
+          <tr><td><code>knowledge_base</code></td><td><code>categories</code>, <code>articles</code>, <code>create_article</code>, <code>update_article</code>, <code>delete_article</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Configuration</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>settings</code></td><td><code>list</code>, <code>get</code>, <code>update</code>, <code>modules</code></td></tr>
+          <tr><td><code>roles</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>permissions</code></td></tr>
+          <tr><td><code>teams</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>members</code></td></tr>
+          <tr><td><code>labels</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code></td></tr>
+          <tr><td><code>custom_fields</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code></td></tr>
+          <tr><td><code>taxonomies</code></td><td><code>list</code>, <code>get</code>, <code>create</code>, <code>update</code>, <code>delete</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Messaging</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>messages</code></td><td><code>list</code>, <code>sent</code>, <code>get</code>, <code>send</code>, <code>unread</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Files</h3>
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>files</code></td><td><code>list</code>, <code>get</code>, <code>download</code>, <code>delete</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Usage with AI Assistants</h2>
+      <p>To use the MCP server with your AI assistant, configure it in your assistant's MCP settings:</p>
+      <h3>Claude Desktop / Cursor / Windsurf</h3>
+      <pre><code>{
+  "mcpServers": {
+    "rise-mcp": {
+      "command": "npx",
+      "args": ["-y", "rise-mcp"],
+      "env": {
+        "RISE_API_URL": "https://tu-empresa.risecrm.com",
+        "RISE_API_KEY": "sk-abc123..."
+      }
+    }
+  }
+}</code></pre>
+      <h3>OpenCode</h3>
+      <p>Add to your project&#39;s <code>.opencode/mcp.json</code>:</p>
+      <pre><code>{
+  "mcpServers": {
+    "rise-mcp": {
+      "command": "npx",
+      "args": ["-y", "rise-mcp"],
+      "env": {
+        "RISE_API_URL": "https://tu-empresa.risecrm.com",
+        "RISE_API_KEY": "sk-abc123..."
+      }
+    }
+  }
+}</code></pre>
+    </section>
+    <footer class="footer">
+      <p>RISE API v1.1.28 &mdash; MIT License</p>
+      <p>Documentation auto-generated from source code.</p>
+    </footer>
+    </div>
+  </div>
+</div>
+<script src="assets/search.js"></script>
+</body>
+</html>
