@@ -12,7 +12,7 @@
   var searchIndex = [];
   var searchTimeout = null;
 
-  fetch('/assets/search-index.json')
+  fetch('assets/search-index.json')
     .then(function (r) { return r.json(); })
     .then(function (data) { searchIndex = data; })
     .catch(function () {});
