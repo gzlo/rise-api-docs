@@ -233,7 +233,7 @@
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/custom-field-values/bulk</code></td>
-            <td>Asigna múltiples custom fields a un registro en una sola llamada. Body esperado: { &quot;related_to_type&quot;: &quot;invoices&quot;, &quot;related_to_id&quot;: 1, &quot;fields&quot;: { &quot;Currency&quot;: &quot;USD&quot;, &quot;NIF&quot;: &quot;30-12345678-9&quot; } }</td>
+            <td>Asigna múltiples custom fields a un registro en una sola llamada. Las keys de `fields` pueden ser: - ID numerico: { &quot;2&quot;: &quot;USD&quot;, &quot;5&quot;: &quot;NIF-12345&quot; } - Titulo: { &quot;Currency&quot;: &quot;USD&quot;, &quot;NIF&quot;: &quot;NIF-12345&quot; } Body: { &quot;related_to_type&quot;: &quot;invoices&quot;, &quot;related_to_id&quot;: 5, &quot;fields&quot;: { &quot;2&quot;: &quot;USD&quot;, &quot;5&quot;: &quot;NIF-12345&quot; } }</td>
           </tr>
           <tr>
             <td><span class="method-badge method-delete">DELETE</span></td>
@@ -355,7 +355,7 @@
           <span class="method-badge method-get">GET</span>
           <code>/api/v1/custom-field-values/bulk</code>
         </div>
-        <p class="endpoint-desc">Asigna múltiples custom fields a un registro en una sola llamada. Body esperado: { &quot;related_to_type&quot;: &quot;invoices&quot;, &quot;related_to_id&quot;: 1, &quot;fields&quot;: { &quot;Currency&quot;: &quot;USD&quot;, &quot;NIF&quot;: &quot;30-12345678-9&quot; } }</p>
+        <p class="endpoint-desc">Asigna múltiples custom fields a un registro en una sola llamada. Las keys de `fields` pueden ser: - ID numerico: { &quot;2&quot;: &quot;USD&quot;, &quot;5&quot;: &quot;NIF-12345&quot; } - Titulo: { &quot;Currency&quot;: &quot;USD&quot;, &quot;NIF&quot;: &quot;NIF-12345&quot; } Body: { &quot;related_to_type&quot;: &quot;invoices&quot;, &quot;related_to_id&quot;: 5, &quot;fields&quot;: { &quot;2&quot;: &quot;USD&quot;, &quot;5&quot;: &quot;NIF-12345&quot; } }</p>
 
         <h4>Required Scopes</h4><p class="scopes"><code>custom_fields:write</code></p>
 
