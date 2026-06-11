@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Templates — RISE API</title>
+  <title>Custom Field Values — RISE API</title>
   <base href="/rise-api-docs/">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -70,7 +70,7 @@
             Contracts
             <span class="ep-count">7</span>
           </a>
-          <a href="modules/custom-field-values.html" class="sidebar-link">
+          <a href="modules/custom-field-values.html" class="sidebar-link active">
             Custom Field Values
             <span class="ep-count">4</span>
           </a>
@@ -170,7 +170,7 @@
             Teams
             <span class="ep-count">6</span>
           </a>
-          <a href="modules/templates.html" class="sidebar-link active">
+          <a href="modules/templates.html" class="sidebar-link">
             Templates
             <span class="ep-count">5</span>
           </a>
@@ -207,11 +207,11 @@
   <div class="main-content">
     <div class="content">
     <nav class="breadcrumbs">
-      <a href="index.html">Home</a> / Templates
+      <a href="index.html">Home</a> / Custom Field Values
     </nav>
 
-    <h1>Templates <span class="badge">5 endpoints</span></h1>
-    <p>CRUD de templates del sistema (admin only).</p>
+    <h1>Custom Field Values <span class="badge">4 endpoints</span></h1>
+    <p>Controlador de valores de campos personalizados (custom field values).</p>
 
     <section class="endpoints-list">
       <h2>Endpoints</h2>
@@ -222,28 +222,23 @@
         <tbody>
                     <tr>
             <td><span class="method-badge method-get">GET</span></td>
-            <td><code>/api/v1/templates</code></td>
-            <td>Index templates</td>
-          </tr>
-          <tr>
-            <td><span class="method-badge method-get">GET</span></td>
-            <td><code>/api/v1/templates/{id}</code></td>
-            <td>Show templates</td>
+            <td><code>/api/v1/custom-field-values</code></td>
+            <td>Lista valores de custom fields, filtrado por entidad y registro.</td>
           </tr>
           <tr>
             <td><span class="method-badge method-post">POST</span></td>
-            <td><code>/api/v1/templates</code></td>
-            <td>Create templates</td>
+            <td><code>/api/v1/custom-field-values</code></td>
+            <td>Crea o actualiza (upsert) el valor de un custom field en un registro.</td>
           </tr>
           <tr>
-            <td><span class="method-badge method-put">PUT</span></td>
-            <td><code>/api/v1/templates/{id}</code></td>
-            <td>Update templates</td>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/custom-field-values/bulk</code></td>
+            <td>Asigna múltiples custom fields a un registro en una sola llamada. Body esperado: { &quot;related_to_type&quot;: &quot;invoices&quot;, &quot;related_to_id&quot;: 1, &quot;fields&quot;: { &quot;Currency&quot;: &quot;USD&quot;, &quot;NIF&quot;: &quot;30-12345678-9&quot; } }</td>
           </tr>
           <tr>
             <td><span class="method-badge method-delete">DELETE</span></td>
-            <td><code>/api/v1/templates/{id}</code></td>
-            <td>Delete templates</td>
+            <td><code>/api/v1/custom-field-values/{id}</code></td>
+            <td>Elimina (soft delete) el valor de un custom field.</td>
           </tr>
 
         </tbody>
@@ -252,69 +247,102 @@
 
     <section class="endpoints-details">
       <h2>Details</h2>
-            <div class="endpoint-detail" id="templates-index">
+            <div class="endpoint-detail" id="custom-field-values-index">
         <div class="endpoint-header">
           <span class="method-badge method-get">GET</span>
-          <code>/api/v1/templates</code>
+          <code>/api/v1/custom-field-values</code>
         </div>
-        <p class="endpoint-desc">Index templates</p>
+        <p class="endpoint-desc">Lista valores de custom fields, filtrado por entidad y registro.</p>
 
-        <h4>Required Scopes</h4><p class="scopes"><code>templates:read</code></p>
+        <h4>Required Scopes</h4><p class="scopes"><code>custom_fields:read</code></p>
 
-        
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>related_to_type</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by related to type</td>
+              </tr>
+              <tr>
+                <td><code>related_to_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by related to id</td>
+              </tr>
+              <tr>
+                <td><code>custom_field_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by custom field id</td>
+              </tr>
+</tbody>
+            </table>
+
 
         
 
         <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/templates \
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/custom-field-values \
   -H "Authorization: Bearer rise_your_token"</code></pre>
 
         <h4>Example Response</h4>
         <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
 
-        
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
       </div>
-      <div class="endpoint-detail" id="templates-show">
-        <div class="endpoint-header">
-          <span class="method-badge method-get">GET</span>
-          <code>/api/v1/templates/{id}</code>
-        </div>
-        <p class="endpoint-desc">Show templates</p>
-
-        <h4>Required Scopes</h4><p class="scopes"><code>templates:read</code></p>
-
-        
-
-        
-
-        <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/templates/{id} \
-  -H "Authorization: Bearer rise_your_token"</code></pre>
-
-        <h4>Example Response</h4>
-        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
-
-        
-      </div>
-      <div class="endpoint-detail" id="templates-create">
+      <div class="endpoint-detail" id="custom-field-values-create">
         <div class="endpoint-header">
           <span class="method-badge method-post">POST</span>
-          <code>/api/v1/templates</code>
+          <code>/api/v1/custom-field-values</code>
         </div>
-        <p class="endpoint-desc">Create templates</p>
+        <p class="endpoint-desc">Crea o actualiza (upsert) el valor de un custom field en un registro.</p>
 
-        <h4>Required Scopes</h4><p class="scopes"><code>templates:write</code></p>
-
-        
+        <h4>Required Scopes</h4><p class="scopes"><code>custom_fields:write</code></p>
 
         
+
+                    <h4>Request Body Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>related_to_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>custom_field_id</code></td>
+                <td><span class="type-badge">int</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Integer value</td>
+              </tr>
+              <tr>
+                <td><code>value</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td><span class="required-badge">Required</span></td>
+                <td>Text value</td>
+              </tr>
+</tbody>
+            </table>
+
 
         <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/templates \
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/custom-field-values \
   -H "Authorization: Bearer rise_your_token" \
   -H "Content-Type: application/json" \
   -d '{
-    "field": "value"
+    "related_to_id": 1,
+    "custom_field_id": 1,
+    "value": "string_value"
 }'</code></pre>
 
         <h4>Example Response</h4>
@@ -322,44 +350,43 @@
 
         
       </div>
-      <div class="endpoint-detail" id="templates-update">
+      <div class="endpoint-detail" id="custom-field-values-bulk">
         <div class="endpoint-header">
-          <span class="method-badge method-put">PUT</span>
-          <code>/api/v1/templates/{id}</code>
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/custom-field-values/bulk</code>
         </div>
-        <p class="endpoint-desc">Update templates</p>
+        <p class="endpoint-desc">Asigna múltiples custom fields a un registro en una sola llamada. Body esperado: { &quot;related_to_type&quot;: &quot;invoices&quot;, &quot;related_to_id&quot;: 1, &quot;fields&quot;: { &quot;Currency&quot;: &quot;USD&quot;, &quot;NIF&quot;: &quot;30-12345678-9&quot; } }</p>
 
-        <h4>Required Scopes</h4><p class="scopes"><code>templates:write</code></p>
+        <h4>Required Scopes</h4><p class="scopes"><code>custom_fields:write</code></p>
 
         
 
         
 
         <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/templates/{id} \
-  -H "Authorization: Bearer rise_your_token" \
-  -H "Content-Type: application/json"</code></pre>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/custom-field-values/bulk \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
 
         <h4>Example Response</h4>
-        <pre><code class="language-json">{"success": true, "message": "Updated", "data": ...}</code></pre>
+        <pre><code class="language-json">{}</code></pre>
 
         
       </div>
-      <div class="endpoint-detail" id="templates-delete">
+      <div class="endpoint-detail" id="custom-field-values-delete">
         <div class="endpoint-header">
           <span class="method-badge method-delete">DELETE</span>
-          <code>/api/v1/templates/{id}</code>
+          <code>/api/v1/custom-field-values/{id}</code>
         </div>
-        <p class="endpoint-desc">Delete templates</p>
+        <p class="endpoint-desc">Elimina (soft delete) el valor de un custom field.</p>
 
-        <h4>Required Scopes</h4><p class="scopes"><code>templates:delete</code></p>
+        <h4>Required Scopes</h4><p class="scopes"><code>custom_fields:write</code></p>
 
         
 
         
 
         <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/templates/{id} \
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/custom-field-values/{id} \
   -H "Authorization: Bearer rise_your_token"</code></pre>
 
         <h4>Example Response</h4>

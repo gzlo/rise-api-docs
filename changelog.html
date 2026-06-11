@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.1.32</span>
+      RISE API <span class="version">v1.2.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -69,6 +69,10 @@
           <a href="modules/contracts.html" class="sidebar-link">
             Contracts
             <span class="ep-count">7</span>
+          </a>
+          <a href="modules/custom-field-values.html" class="sidebar-link">
+            Custom Field Values
+            <span class="ep-count">4</span>
           </a>
           <a href="modules/custom-fields.html" class="sidebar-link">
             Custom Fields
@@ -211,16 +215,22 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.1.32</h3>
-          <span class="changelog-date">2026-06-10</span>
+          <h3>v1.2.0</h3>
+          <span class="changelog-date">2026-06-11</span>
         </div>
-        <pre class="changelog-notes">se agrega action link con anchor a rise_api/settings
-para acceso rapido desde Settings &gt; Plugins</pre>
+        <pre class="changelog-notes">- Nuevo endpoint /api/v1/custom-fields-values con CRUD + bulk upsert
+- Nuevo scope custom_fields:write mapeado para staff
+- Helpers loadCustomFields() y saveCustomFields() en BaseController
+- Todos los endpoints de entidades exponen custom_fields en GET
+- Todos los create/update aceptan custom_fields como parametro
+- Entidades: invoices, estimates, expenses, orders, subscriptions,
+  proposals, contracts, projects, tasks, tickets, leads, clients, users
+- MCP: nuevo tool custom_field_values con list/get/set/delete/bulk</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.1.32 &mdash; MIT License</p>
+      <p>RISE API v1.2.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
