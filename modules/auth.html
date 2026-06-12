@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.2.1</span>
+      RISE API <span class="version">v1.3.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -233,7 +233,7 @@
           <tr>
             <td><span class="method-badge method-post">POST</span></td>
             <td><code>/api/v1/auth/session</code></td>
-            <td>POST /api/v1/auth/session Token exchange: recibe un API key en el body, valida que tenga auth_mode=exchange, y retorna un session token de uso temporal. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;rise_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;rise_sess_...&quot;, &quot;expires_in&quot;: 1800}}</td>
+            <td>POST /api/v1/auth/session Token exchange: recibe un API key en el body, valida que tenga auth_mode=exchange, y retorna un session token de uso temporal. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;exch_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;exch_sess_...&quot;, &quot;expires_in&quot;: 1800}}</td>
           </tr>
 
         </tbody>
@@ -291,7 +291,7 @@
           <span class="method-badge method-post">POST</span>
           <code>/api/v1/auth/session</code>
         </div>
-        <p class="endpoint-desc">POST /api/v1/auth/session Token exchange: recibe un API key en el body, valida que tenga auth_mode=exchange, y retorna un session token de uso temporal. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;rise_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;rise_sess_...&quot;, &quot;expires_in&quot;: 1800}}</p>
+        <p class="endpoint-desc">POST /api/v1/auth/session Token exchange: recibe un API key en el body, valida que tenga auth_mode=exchange, y retorna un session token de uso temporal. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;exch_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;exch_sess_...&quot;, &quot;expires_in&quot;: 1800}}</p>
 
         
 
@@ -312,7 +312,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.2.1 &mdash; MIT License</p>
+      <p>RISE API v1.3.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
