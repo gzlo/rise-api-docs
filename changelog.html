@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.5.0</span>
+      RISE API <span class="version">v1.5.1</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -215,29 +215,19 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.5.0</h3>
+          <h3>v1.5.1</h3>
           <span class="changelog-date">2026-06-15</span>
         </div>
-        <pre class="changelog-notes">- TasksController: created/updated/deleted/commented
-- TicketsController: created/assigned/closed/reopened/commented
-- ProjectsController: created/completed/deleted/member/commented
-- InvoicesController: payment confirmation/notification
-- EstimatesController: accepted/rejected/commented/request
-- ProposalsController: accepted/rejected/commented
-- ContractsController: accepted/rejected
-- OrdersController: created/status updated
-- SubscriptionsController: started/cancelled
-- LeadsController: created/converted
-- LeavesController: created/approved/rejected/cancelled
-- MessagesController: sent/replied
-- EventsController: created/modified
-- TimelineController: post created/commented
-- AnnouncementsController: created</pre>
+        <pre class="changelog-notes">- la tabla milestones tiene due_date NOT NULL en BD
+- el MCP enviaba solo title sin due_date, causando insert fallido
+- agregar due_date a required fields
+- agregar validación de error si ci_save retorna false/null
+- castear id a int en la respuesta para evitar valores nulos</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.5.0 &mdash; MIT License</p>
+      <p>RISE API v1.5.1 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
