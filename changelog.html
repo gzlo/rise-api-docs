@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.5.1</span>
+      RISE API <span class="version">v1.5.2</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -215,19 +215,18 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.5.1</h3>
+          <h3>v1.5.2</h3>
           <span class="changelog-date">2026-06-15</span>
         </div>
-        <pre class="changelog-notes">- la tabla milestones tiene due_date NOT NULL en BD
-- el MCP enviaba solo title sin due_date, causando insert fallido
-- agregar due_date a required fields
-- agregar validación de error si ci_save retorna false/null
-- castear id a int en la respuesta para evitar valores nulos</pre>
+        <pre class="changelog-notes">- la BD requiere due_date NOT NULL, pero el API no debe exigirlo
+- si el MCP no envía due_date, se usa date(&#039;Y-m-d&#039;) como fallback
+- esto permite crear milestones sin especificar fecha desde el MCP
+- el due_date sigue siendo aceptado si se envía explícitamente</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.5.1 &mdash; MIT License</p>
+      <p>RISE API v1.5.2 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
