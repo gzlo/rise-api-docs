@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.6.0</span>
+      RISE API <span class="version">v1.6.1</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -215,23 +215,17 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.6.0</h3>
+          <h3>v1.6.1</h3>
           <span class="changelog-date">2026-06-15</span>
         </div>
-        <pre class="changelog-notes">GET  /api/v1/settings/notifications?category=project
-GET  /api/v1/settings/notifications/{id}
-PUT  /api/v1/settings/notifications/{id}
-
-- permite listar/ver/editar settings de notificaciones
-- soporta filtro por categoria (announcement, project, ticket, etc.)
-- valida notify_to_terms contra lista de terminos permitidos
-- convierte notify_to_team y notify_to_team_members a arrays de IDs
-- admin only</pre>
+        <pre class="changelog-notes">El MCP rise-mcp genera tool_name = notification_settings mapeando
+a endpoints /api/v1/notification_settings. Agregamos aliases para
+list/get/put que apuntan a los mismos métodos del controlador.</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.6.0 &mdash; MIT License</p>
+      <p>RISE API v1.6.1 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
