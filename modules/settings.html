@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.5.2</span>
+      RISE API <span class="version">v1.6.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -152,7 +152,7 @@
           </a>
           <a href="modules/settings.html" class="sidebar-link active">
             Settings
-            <span class="ep-count">61</span>
+            <span class="ep-count">64</span>
           </a>
           <a href="modules/subscriptions.html" class="sidebar-link">
             Subscriptions
@@ -210,7 +210,7 @@
       <a href="index.html">Home</a> / Settings
     </nav>
 
-    <h1>Settings <span class="badge">61 endpoints</span></h1>
+    <h1>Settings <span class="badge">64 endpoints</span></h1>
     <p>Controlador de configuraciones del sistema (admin only).</p>
 
     <section class="endpoints-list">
@@ -524,6 +524,21 @@
             <td><span class="method-badge method-put">PUT</span></td>
             <td><code>/api/v1/settings/tinymce</code></td>
             <td>UpdateTinymce settings</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/settings/notifications</code></td>
+            <td>Notifications settings</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/settings/notification</code></td>
+            <td>Notification settings</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/settings/notification</code></td>
+            <td>UpdateNotification settings</td>
           </tr>
 
         </tbody>
@@ -1905,10 +1920,87 @@
 
         
       </div>
+      <div class="endpoint-detail" id="settings-notifications">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/settings/notifications</code>
+        </div>
+        <p class="endpoint-desc">Notifications settings</p>
+
+        
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>category</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by category</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/settings/notifications \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="settings-notification">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/settings/notification</code>
+        </div>
+        <p class="endpoint-desc">Notification settings</p>
+
+        
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/settings/notification \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="settings-updateNotification">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/settings/notification</code>
+        </div>
+        <p class="endpoint-desc">UpdateNotification settings</p>
+
+        
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/settings/notification \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.5.2 &mdash; MIT License</p>
+      <p>RISE API v1.6.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
