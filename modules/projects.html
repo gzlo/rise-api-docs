@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.6.1</span>
+      RISE API <span class="version">v1.7.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -132,7 +132,7 @@
           </a>
           <a href="modules/projects.html" class="sidebar-link active">
             Projects
-            <span class="ep-count">13</span>
+            <span class="ep-count">14</span>
           </a>
           <a href="modules/proposals.html" class="sidebar-link">
             Proposals
@@ -210,7 +210,7 @@
       <a href="index.html">Home</a> / Projects
     </nav>
 
-    <h1>Projects <span class="badge">13 endpoints</span></h1>
+    <h1>Projects <span class="badge">14 endpoints</span></h1>
     <p></p>
 
     <section class="endpoints-list">
@@ -284,6 +284,11 @@
             <td><span class="method-badge method-post">POST</span></td>
             <td><code>/api/v1/projects/{id}/milestones</code></td>
             <td>CreateMilestone projects</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-put">PUT</span></td>
+            <td><code>/api/v1/projects/{id}/milestones/{milestone_id}</code></td>
+            <td>UpdateMilestone projects</td>
           </tr>
 
         </tbody>
@@ -616,10 +621,33 @@
 
         
       </div>
+      <div class="endpoint-detail" id="projects-updateMilestone">
+        <div class="endpoint-header">
+          <span class="method-badge method-put">PUT</span>
+          <code>/api/v1/projects/{id}/milestones/{milestone_id}</code>
+        </div>
+        <p class="endpoint-desc">UpdateMilestone projects</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>milestones:update</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X PUT https://your-rise.com/api/v1/projects/{id}/milestones/{milestone_id} \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.6.1 &mdash; MIT License</p>
+      <p>RISE API v1.7.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
