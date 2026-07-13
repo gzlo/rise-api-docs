@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.8.0</span>
+      RISE API <span class="version">v1.9.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -215,23 +215,21 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.8.0</h3>
-          <span class="changelog-date">2026-06-24</span>
+          <h3>v1.9.0</h3>
+          <span class="changelog-date">2026-07-13</span>
         </div>
-        <pre class="changelog-notes">- feat: HTTPS enforcement en produccion (BaseController)
-- feat: security headers (HSTS, X-Content-Type-Options, X-Frame, etc.)
-- feat: validacion ip_restriction en authenticate() con soporte CIDR/rangos
-- feat: normalizacion permisos array-&gt;objeto en update_permissions
-- feat: metadata del token en endpoints /me y /me/permissions
-- feat: columna ip_restriction en api_keys (migracion automatica)
-- docs: CHANGELOG.md con historial completo
-
-Version: 1.8.0</pre>
+        <pre class="changelog-notes">- feat: handler global de excepciones en BaseController (bug 174)
+- fix: respetar scopes explicitos del token sin intersectionar con permisos RISE (bug 192)
+- fix: agregar filtro deadline en TasksController (bug 187)
+- fix: corregir queries SQL de reports:invoices e income_vs_expense con JOIN a invoice_items (bug 193)
+- fix: usar UPDATE directo para permissions en RolesController (bug 194)
+- fix: validacion de enum para context en LabelsController (bug 198)
+- chore: bump version 1.8.0 -&gt; 1.9.0</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.8.0 &mdash; MIT License</p>
+      <p>RISE API v1.9.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
