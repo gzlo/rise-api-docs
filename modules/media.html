@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.10.2</span>
+      RISE API <span class="version">v1.11.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -120,7 +120,7 @@
           </a>
           <a href="modules/media.html" class="sidebar-link active">
             Media
-            <span class="ep-count">2</span>
+            <span class="ep-count">4</span>
           </a>
           <a href="modules/messages.html" class="sidebar-link">
             Messages
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Media
     </nav>
 
-    <h1>Media <span class="badge">2 endpoints</span></h1>
+    <h1>Media <span class="badge">4 endpoints</span></h1>
     <p>MediaController unificado — expone archivos de cualquier contexto RISE</p>
 
     <section class="endpoints-list">
@@ -227,12 +227,22 @@
                     <tr>
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/media</code></td>
-            <td>Lista archivos por contexto. Query params: context (required) — task_comment | project_file | general_file id (optional) — ID de la entidad (comment_id para task_comment) task_id (optional) — ID de tarea (solo para context=task_comment; busca archivos en todos los comentarios de la tarea)</td>
+            <td>Lista archivos por contexto. Query params: context (required) — cualquiera de los 21 contextos id (optional) — ID de la entidad task_id (optional) — solo para context=task_comment; busca archivos en todos los comentarios de la tarea (fix #268)</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td><code>/api/v1/media/upload</code></td>
+            <td>Sube un archivo a un contexto serializado. Request: multipart/form-data context (required) — contexto serializado (ej: task_comment, invoice) context_id (required) — ID de la entidad file (required) — archivo binario Scopes: media:upload</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-delete">DELETE</span></td>
+            <td><code>/api/v1/media/{id}</code></td>
+            <td>Elimina un archivo de un contexto serializado. Request (JSON body): context (required) — contexto serializado context_id (required) — ID de la entidad file_index (required) — índice del archivo a eliminar Scopes: media:delete</td>
           </tr>
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/media/{id}/download</code></td>
-            <td>Descarga un archivo específico según contexto. Query params: context (required) — task_comment | project_file | general_file id (required) — ID de la entidad file_index (optional, solo para contextos serializados) — índice del archivo</td>
+            <td>Descarga un archivo específico según contexto. Query params: context (required) — cualquiera de los 21 contextos id (required) — ID de la entidad file_index (optional, solo serializados) — índice del archivo</td>
           </tr>
 
         </tbody>
@@ -246,7 +256,7 @@
           <span class="method-badge method-get">GET</span>
           <code>/api/v1/media</code>
         </div>
-        <p class="endpoint-desc">Lista archivos por contexto. Query params: context (required) — task_comment | project_file | general_file id (optional) — ID de la entidad (comment_id para task_comment) task_id (optional) — ID de tarea (solo para context=task_comment; busca archivos en todos los comentarios de la tarea)</p>
+        <p class="endpoint-desc">Lista archivos por contexto. Query params: context (required) — cualquiera de los 21 contextos id (optional) — ID de la entidad task_id (optional) — solo para context=task_comment; busca archivos en todos los comentarios de la tarea (fix #268)</p>
 
         <h4>Required Scopes</h4><p class="scopes"><code>media:read</code></p>
 
@@ -273,12 +283,57 @@
 
         
       </div>
+      <div class="endpoint-detail" id="media-upload">
+        <div class="endpoint-header">
+          <span class="method-badge method-post">POST</span>
+          <code>/api/v1/media/upload</code>
+        </div>
+        <p class="endpoint-desc">Sube un archivo a un contexto serializado. Request: multipart/form-data context (required) — contexto serializado (ej: task_comment, invoice) context_id (required) — ID de la entidad file (required) — archivo binario Scopes: media:upload</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>media:upload</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/media/upload \
+  -H "Authorization: Bearer rise_your_token" \
+  -H "Content-Type: application/json"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
+      <div class="endpoint-detail" id="media-delete">
+        <div class="endpoint-header">
+          <span class="method-badge method-delete">DELETE</span>
+          <code>/api/v1/media/{id}</code>
+        </div>
+        <p class="endpoint-desc">Elimina un archivo de un contexto serializado. Request (JSON body): context (required) — contexto serializado context_id (required) — ID de la entidad file_index (required) — índice del archivo a eliminar Scopes: media:delete</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>media:delete</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X DELETE https://your-rise.com/api/v1/media/{id} \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{"success": true, "message": "Deleted"}</code></pre>
+
+        
+      </div>
       <div class="endpoint-detail" id="media-download">
         <div class="endpoint-header">
           <span class="method-badge method-get">GET</span>
           <code>/api/v1/media/{id}/download</code>
         </div>
-        <p class="endpoint-desc">Descarga un archivo específico según contexto. Query params: context (required) — task_comment | project_file | general_file id (required) — ID de la entidad file_index (optional, solo para contextos serializados) — índice del archivo</p>
+        <p class="endpoint-desc">Descarga un archivo específico según contexto. Query params: context (required) — cualquiera de los 21 contextos id (required) — ID de la entidad file_index (optional, solo serializados) — índice del archivo</p>
 
         <h4>Required Scopes</h4><p class="scopes"><code>media:read</code></p>
 
@@ -308,7 +363,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.10.2 &mdash; MIT License</p>
+      <p>RISE API v1.11.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
