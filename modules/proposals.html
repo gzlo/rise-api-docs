@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.11.6</span>
+      RISE API <span class="version">v1.12.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -68,7 +68,7 @@
           </a>
           <a href="modules/contracts.html" class="sidebar-link">
             Contracts
-            <span class="ep-count">7</span>
+            <span class="ep-count">8</span>
           </a>
           <a href="modules/custom-field-values.html" class="sidebar-link">
             Custom Field Values
@@ -80,7 +80,7 @@
           </a>
           <a href="modules/estimates.html" class="sidebar-link">
             Estimates
-            <span class="ep-count">12</span>
+            <span class="ep-count">13</span>
           </a>
           <a href="modules/events.html" class="sidebar-link">
             Events
@@ -140,7 +140,7 @@
           </a>
           <a href="modules/proposals.html" class="sidebar-link active">
             Proposals
-            <span class="ep-count">10</span>
+            <span class="ep-count">11</span>
           </a>
           <a href="modules/reminders.html" class="sidebar-link">
             Reminders
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Proposals
     </nav>
 
-    <h1>Proposals <span class="badge">10 endpoints</span></h1>
+    <h1>Proposals <span class="badge">11 endpoints</span></h1>
     <p>Controlador de propuestas (proposals).</p>
 
     <section class="endpoints-list">
@@ -273,6 +273,11 @@
             <td><span class="method-badge method-put">PUT</span></td>
             <td><code>/api/v1/proposals/{id}/status</code></td>
             <td>Actualiza el estado de una propuesta.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/proposals/download-pdf</code></td>
+            <td>Descarga el PDF de una propuesta.</td>
           </tr>
 
         </tbody>
@@ -630,10 +635,32 @@
 
         
       </div>
+      <div class="endpoint-detail" id="proposals-downloadPdf">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/proposals/download-pdf</code>
+        </div>
+        <p class="endpoint-desc">Descarga el PDF de una propuesta.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>proposals:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/proposals/download-pdf \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.11.6 &mdash; MIT License</p>
+      <p>RISE API v1.12.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>

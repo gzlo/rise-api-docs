@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.11.6</span>
+      RISE API <span class="version">v1.12.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -68,7 +68,7 @@
           </a>
           <a href="modules/contracts.html" class="sidebar-link active">
             Contracts
-            <span class="ep-count">7</span>
+            <span class="ep-count">8</span>
           </a>
           <a href="modules/custom-field-values.html" class="sidebar-link">
             Custom Field Values
@@ -80,7 +80,7 @@
           </a>
           <a href="modules/estimates.html" class="sidebar-link">
             Estimates
-            <span class="ep-count">12</span>
+            <span class="ep-count">13</span>
           </a>
           <a href="modules/events.html" class="sidebar-link">
             Events
@@ -140,7 +140,7 @@
           </a>
           <a href="modules/proposals.html" class="sidebar-link">
             Proposals
-            <span class="ep-count">10</span>
+            <span class="ep-count">11</span>
           </a>
           <a href="modules/reminders.html" class="sidebar-link">
             Reminders
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Contracts
     </nav>
 
-    <h1>Contracts <span class="badge">7 endpoints</span></h1>
+    <h1>Contracts <span class="badge">8 endpoints</span></h1>
     <p>Controlador de contratos (contracts).</p>
 
     <section class="endpoints-list">
@@ -258,6 +258,11 @@
             <td><span class="method-badge method-put">PUT</span></td>
             <td><code>/api/v1/contracts/{id}/status</code></td>
             <td>Actualiza el estado de un contrato.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/contracts/download-pdf</code></td>
+            <td>Descarga el PDF de un contrato.</td>
           </tr>
 
         </tbody>
@@ -566,10 +571,32 @@
 
         
       </div>
+      <div class="endpoint-detail" id="contracts-downloadPdf">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/contracts/download-pdf</code>
+        </div>
+        <p class="endpoint-desc">Descarga el PDF de un contrato.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>contracts:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/contracts/download-pdf \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.11.6 &mdash; MIT License</p>
+      <p>RISE API v1.12.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>

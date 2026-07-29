@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.11.6</span>
+      RISE API <span class="version">v1.12.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -68,7 +68,7 @@
           </a>
           <a href="modules/contracts.html" class="sidebar-link">
             Contracts
-            <span class="ep-count">7</span>
+            <span class="ep-count">8</span>
           </a>
           <a href="modules/custom-field-values.html" class="sidebar-link">
             Custom Field Values
@@ -80,7 +80,7 @@
           </a>
           <a href="modules/estimates.html" class="sidebar-link">
             Estimates
-            <span class="ep-count">12</span>
+            <span class="ep-count">13</span>
           </a>
           <a href="modules/events.html" class="sidebar-link">
             Events
@@ -140,7 +140,7 @@
           </a>
           <a href="modules/proposals.html" class="sidebar-link">
             Proposals
-            <span class="ep-count">10</span>
+            <span class="ep-count">11</span>
           </a>
           <a href="modules/reminders.html" class="sidebar-link">
             Reminders
@@ -219,17 +219,20 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.11.6</h3>
+          <h3>v1.12.0</h3>
           <span class="changelog-date">2026-07-29</span>
         </div>
-        <pre class="changelog-notes">tarea 281: las carpetas creadas via API no se podian navegar en el UI
-  porque faltaban folder_id (hash unico), level (jerarquia) y permissions
-  (control de acceso). Ahora se generan con el mismo patron que el web UI</pre>
+        <pre class="changelog-notes">tarea 284: GET /api/v1/proposals/{id}/pdf
+           GET /api/v1/estimates/{id}/pdf
+           GET /api/v1/contracts/{id}/pdf
+
+usa los helpers nativos get_proposal_making_data() + prepare_proposal_pdf()
+y sus equivalentes para estimates y contracts</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.11.6 &mdash; MIT License</p>
+      <p>RISE API v1.12.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
