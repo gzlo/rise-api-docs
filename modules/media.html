@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auth — RISE API</title>
+  <title>Media — RISE API</title>
   <base href="/rise-api-docs/">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
                 <a href="index.html" class="sidebar-link">
             <span class="nav-icon">&#8962;</span> Home
           </a>
-          <a href="auth.html" class="sidebar-link active">
+          <a href="auth.html" class="sidebar-link">
             <span class="nav-icon">&#128274;</span> Authentication
           </a>
           <a href="errors.html" class="sidebar-link">
@@ -54,7 +54,7 @@
             Attendance
             <span class="ep-count">6</span>
           </a>
-          <a href="modules/auth.html" class="sidebar-link active">
+          <a href="modules/auth.html" class="sidebar-link">
             Auth
             <span class="ep-count">3</span>
           </a>
@@ -118,7 +118,7 @@
             Leaves
             <span class="ep-count">8</span>
           </a>
-          <a href="modules/media.html" class="sidebar-link">
+          <a href="modules/media.html" class="sidebar-link active">
             Media
             <span class="ep-count">2</span>
           </a>
@@ -211,11 +211,11 @@
   <div class="main-content">
     <div class="content">
     <nav class="breadcrumbs">
-      <a href="index.html">Home</a> / Auth
+      <a href="index.html">Home</a> / Media
     </nav>
 
-    <h1>Auth <span class="badge">3 endpoints</span></h1>
-    <p></p>
+    <h1>Media <span class="badge">2 endpoints</span></h1>
+    <p>MediaController unificado — expone archivos de cualquier contexto RISE</p>
 
     <section class="endpoints-list">
       <h2>Endpoints</h2>
@@ -226,18 +226,13 @@
         <tbody>
                     <tr>
             <td><span class="method-badge method-get">GET</span></td>
-            <td><code>/api/v1/auth/me</code></td>
-            <td>GET /api/v1/me Retorna los datos del usuario autenticado y metadata del token.</td>
+            <td><code>/api/v1/media</code></td>
+            <td>Lista archivos por contexto. Query params: context (required) — task_comment | project_file | general_file id (required) — ID de la entidad</td>
           </tr>
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
-            <td><code>/api/v1/auth/me/permissions</code></td>
-            <td>GET /api/v1/me/permissions Retorna los permisos efectivos del usuario y metadata del token.</td>
-          </tr>
-          <tr>
-            <td><span class="method-badge method-post">POST</span></td>
-            <td><code>/api/v1/auth/session</code></td>
-            <td>POST /api/v1/auth/session Token exchange: recibe un API key directo (rise_*) o exchange (exch_*) en el body, y retorna un session token de uso temporal (exch_sess_*). Permite que cualquier API key genere una sesión efímera. El MCP worker nunca expone el API key real en los requests subsecuentes. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;rise_abc123... o exch_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;exch_sess_...&quot;, &quot;expires_in&quot;: 1800}}</td>
+            <td><code>/api/v1/media/{id}/download</code></td>
+            <td>Descarga un archivo específico según contexto. Query params: context (required) — task_comment | project_file | general_file id (required) — ID de la entidad file_index (optional, solo para contextos serializados) — índice del archivo</td>
           </tr>
 
         </tbody>
@@ -246,67 +241,64 @@
 
     <section class="endpoints-details">
       <h2>Details</h2>
-            <div class="endpoint-detail" id="auth-me">
+            <div class="endpoint-detail" id="media-index">
         <div class="endpoint-header">
           <span class="method-badge method-get">GET</span>
-          <code>/api/v1/auth/me</code>
+          <code>/api/v1/media</code>
         </div>
-        <p class="endpoint-desc">GET /api/v1/me Retorna los datos del usuario autenticado y metadata del token.</p>
+        <p class="endpoint-desc">Lista archivos por contexto. Query params: context (required) — task_comment | project_file | general_file id (required) — ID de la entidad</p>
 
-        <h4>Required Scopes</h4><p class="scopes"><code>auth:me</code></p>
+        <h4>Required Scopes</h4><p class="scopes"><code>media:read</code></p>
 
-        
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>context</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by context</td>
+              </tr>
+</tbody>
+            </table>
+
 
         
 
         <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/auth/me \
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/media \
   -H "Authorization: Bearer rise_your_token"</code></pre>
 
         <h4>Example Response</h4>
-        <pre><code class="language-json">{}</code></pre>
+        <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
 
         
       </div>
-      <div class="endpoint-detail" id="auth-permissions">
+      <div class="endpoint-detail" id="media-download">
         <div class="endpoint-header">
           <span class="method-badge method-get">GET</span>
-          <code>/api/v1/auth/me/permissions</code>
+          <code>/api/v1/media/{id}/download</code>
         </div>
-        <p class="endpoint-desc">GET /api/v1/me/permissions Retorna los permisos efectivos del usuario y metadata del token.</p>
+        <p class="endpoint-desc">Descarga un archivo específico según contexto. Query params: context (required) — task_comment | project_file | general_file id (required) — ID de la entidad file_index (optional, solo para contextos serializados) — índice del archivo</p>
 
-        <h4>Required Scopes</h4><p class="scopes"><code>auth:me</code></p>
+        <h4>Required Scopes</h4><p class="scopes"><code>media:read</code></p>
 
-        
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>context</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by context</td>
+              </tr>
+</tbody>
+            </table>
+
 
         
 
         <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/auth/me/permissions \
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/media/{id}/download \
   -H "Authorization: Bearer rise_your_token"</code></pre>
-
-        <h4>Example Response</h4>
-        <pre><code class="language-json">{}</code></pre>
-
-        
-      </div>
-      <div class="endpoint-detail" id="auth-session">
-        <div class="endpoint-header">
-          <span class="method-badge method-post">POST</span>
-          <code>/api/v1/auth/session</code>
-        </div>
-        <p class="endpoint-desc">POST /api/v1/auth/session Token exchange: recibe un API key directo (rise_*) o exchange (exch_*) en el body, y retorna un session token de uso temporal (exch_sess_*). Permite que cualquier API key genere una sesión efímera. El MCP worker nunca expone el API key real en los requests subsecuentes. Este endpoint NO requiere Bearer token previo. El constructor de BaseController salta authenticate() para esta ruta. Request: {&quot;api_key&quot;: &quot;rise_abc123... o exch_abc123...&quot;} Response: {&quot;success&quot;: true, &quot;data&quot;: {&quot;session_token&quot;: &quot;exch_sess_...&quot;, &quot;expires_in&quot;: 1800}}</p>
-
-        
-
-        
-
-        
-
-        <h4>Example Request</h4>
-        <pre><code class="language-bash">curl -X POST https://your-rise.com/api/v1/auth/session \
-  -H "Authorization: Bearer rise_your_token" \
-  -H "Content-Type: application/json"</code></pre>
 
         <h4>Example Response</h4>
         <pre><code class="language-json">{}</code></pre>
