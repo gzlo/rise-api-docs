@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.12.0</span>
+      RISE API <span class="version">v1.12.1</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -100,7 +100,7 @@
           </a>
           <a href="modules/invoices.html" class="sidebar-link">
             Invoices
-            <span class="ep-count">10</span>
+            <span class="ep-count">11</span>
           </a>
           <a href="modules/knowledge-base.html" class="sidebar-link">
             Knowledge Base
@@ -132,7 +132,7 @@
           </a>
           <a href="modules/orders.html" class="sidebar-link">
             Orders
-            <span class="ep-count">7</span>
+            <span class="ep-count">8</span>
           </a>
           <a href="modules/projects.html" class="sidebar-link">
             Projects
@@ -219,20 +219,18 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.12.0</h3>
+          <h3>v1.12.1</h3>
           <span class="changelog-date">2026-07-29</span>
         </div>
-        <pre class="changelog-notes">tarea 284: GET /api/v1/proposals/{id}/pdf
-           GET /api/v1/estimates/{id}/pdf
-           GET /api/v1/contracts/{id}/pdf
+        <pre class="changelog-notes">tarea 288: GET /api/v1/orders/{id}/pdf → orders:read
+tarea 286: GET /api/v1/invoices/{id}/pdf → invoices:read
 
-usa los helpers nativos get_proposal_making_data() + prepare_proposal_pdf()
-y sus equivalentes para estimates y contracts</pre>
+usa prepare_order_pdf() y prepare_invoice_pdf() del core</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.12.0 &mdash; MIT License</p>
+      <p>RISE API v1.12.1 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>

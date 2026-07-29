@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.12.0</span>
+      RISE API <span class="version">v1.12.1</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -100,7 +100,7 @@
           </a>
           <a href="modules/invoices.html" class="sidebar-link active">
             Invoices
-            <span class="ep-count">10</span>
+            <span class="ep-count">11</span>
           </a>
           <a href="modules/knowledge-base.html" class="sidebar-link">
             Knowledge Base
@@ -132,7 +132,7 @@
           </a>
           <a href="modules/orders.html" class="sidebar-link">
             Orders
-            <span class="ep-count">7</span>
+            <span class="ep-count">8</span>
           </a>
           <a href="modules/projects.html" class="sidebar-link">
             Projects
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Invoices
     </nav>
 
-    <h1>Invoices <span class="badge">10 endpoints</span></h1>
+    <h1>Invoices <span class="badge">11 endpoints</span></h1>
     <p>Controlador de facturas (invoices).</p>
 
     <section class="endpoints-list">
@@ -273,6 +273,11 @@
             <td><span class="method-badge method-put">PUT</span></td>
             <td><code>/api/v1/invoices/{id}/status</code></td>
             <td>Actualiza el estado de una factura.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/invoices/download-pdf</code></td>
+            <td>Descarga el PDF de una factura.</td>
           </tr>
 
         </tbody>
@@ -817,10 +822,32 @@
 
         <p><span class="restriction-badge">Ownership check</span> Access limited by: created_by</p>
       </div>
+      <div class="endpoint-detail" id="invoices-downloadPdf">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/invoices/download-pdf</code>
+        </div>
+        <p class="endpoint-desc">Descarga el PDF de una factura.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>invoices:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/invoices/download-pdf \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.12.0 &mdash; MIT License</p>
+      <p>RISE API v1.12.1 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
