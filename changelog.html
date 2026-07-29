@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.11.3</span>
+      RISE API <span class="version">v1.11.4</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -219,18 +219,16 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.11.3</h3>
+          <h3>v1.11.4</h3>
           <span class="changelog-date">2026-07-29</span>
         </div>
-        <pre class="changelog-notes">tarea 277: reemplazar get_setting(&#039;file_path&#039;) inexistente por
-  temp_file_path + move_temp_file(), mismo patron que MediaController.
-  Corregido ademas el campo de usuario en general_files de created_by/user_id
-  a uploaded_by, con soporte en requireOwnership() y format()</pre>
+        <pre class="changelog-notes">tarea 278: eliminar file_path del data (no es columna en general_files),
+  agregar user_id y context_id para consistencia con el core</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.11.3 &mdash; MIT License</p>
+      <p>RISE API v1.11.4 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
