@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.12.1</span>
+      RISE API <span class="version">v1.12.2</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -60,7 +60,7 @@
           </a>
           <a href="modules/clients.html" class="sidebar-link">
             Clients
-            <span class="ep-count">6</span>
+            <span class="ep-count">7</span>
           </a>
           <a href="modules/contacts.html" class="sidebar-link">
             Contacts
@@ -219,18 +219,19 @@
     <div class="changelog-list">
             <div class="changelog-entry">
         <div class="changelog-header">
-          <h3>v1.12.1</h3>
+          <h3>v1.12.2</h3>
           <span class="changelog-date">2026-07-29</span>
         </div>
-        <pre class="changelog-notes">tarea 288: GET /api/v1/orders/{id}/pdf → orders:read
-tarea 286: GET /api/v1/invoices/{id}/pdf → invoices:read
+        <pre class="changelog-notes">tarea 290: GET /api/v1/clients/{id}/statement/pdf
+  ?start_date=2026-01-01&amp;end_date=2026-12-31
 
-usa prepare_order_pdf() y prepare_invoice_pdf() del core</pre>
+usa get_statement_making_data() + prepare_statement_pdf() del core
+scope: clients:read</pre>
       </div>
 
     </div>
     <footer class="footer">
-      <p>RISE API v1.12.1 &mdash; MIT License</p>
+      <p>RISE API v1.12.2 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
