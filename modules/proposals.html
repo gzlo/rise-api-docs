@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.12.3</span>
+      RISE API <span class="version">v1.12.4</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -277,7 +277,7 @@
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/proposals/download-pdf</code></td>
-            <td>Descarga el PDF de una propuesta.</td>
+            <td>Descarga el PDF de una propuesta. Captura los bytes via TCPDF Output(&#039;S&#039;) (string capture) en lugar de ob_start() sobre el modo &#039;download&#039; — Output(&#039;D&#039;) emite headers PHP y hace exit, corrompiendo la respuesta JSON/PDF de la API.</td>
           </tr>
 
         </tbody>
@@ -483,8 +483,8 @@
   -d '{
     "client_id": 1,
     "project_id": 1,
-    "proposal_date": "2026-07-29",
-    "valid_until": "2026-07-29",
+    "proposal_date": "2026-08-13",
+    "valid_until": "2026-08-13",
     "tax_id": 1,
     "tax_id2": 0,
     "discount_amount": 0,
@@ -640,7 +640,7 @@
           <span class="method-badge method-get">GET</span>
           <code>/api/v1/proposals/download-pdf</code>
         </div>
-        <p class="endpoint-desc">Descarga el PDF de una propuesta.</p>
+        <p class="endpoint-desc">Descarga el PDF de una propuesta. Captura los bytes via TCPDF Output(&#039;S&#039;) (string capture) en lugar de ob_start() sobre el modo &#039;download&#039; — Output(&#039;D&#039;) emite headers PHP y hace exit, corrompiendo la respuesta JSON/PDF de la API.</p>
 
         <h4>Required Scopes</h4><p class="scopes"><code>proposals:read</code></p>
 
@@ -660,7 +660,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.12.3 &mdash; MIT License</p>
+      <p>RISE API v1.12.4 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
