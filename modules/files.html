@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.12.5</span>
+      RISE API <span class="version">v1.12.6</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -92,7 +92,7 @@
           </a>
           <a href="modules/files.html" class="sidebar-link active">
             Files
-            <span class="ep-count">10</span>
+            <span class="ep-count">12</span>
           </a>
           <a href="modules/health.html" class="sidebar-link">
             Health
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Files
     </nav>
 
-    <h1>Files <span class="badge">10 endpoints</span></h1>
+    <h1>Files <span class="badge">12 endpoints</span></h1>
     <p>Controlador de archivos y carpetas (file manager).</p>
 
     <section class="endpoints-list">
@@ -228,6 +228,16 @@
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/files</code></td>
             <td>Lista archivos con filtros opcionales.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/client-files</code></td>
+            <td>Lista los archivos de un cliente (mismas ramas y semantica que GET /files?client_id={id}). Staff: rama &#039;client&#039; del modelo core con root files (folder_id&lt;=0) a menos que folder_id entre a una carpeta. Cliente: forzado a su propio client_id con context_type=&#039;client_portal&#039;.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/client-file-stats</code></td>
+            <td>Cuenta TODOS los archivos de un cliente (context=&#039;client&#039; AND client_id=N, sin restriccion de carpeta) via la rama &#039;client_portal_list_view&#039; del modelo core. Nota: asimetria documentada con la lista — stats incluye archivos dentro de carpetas; la lista solo muestra root files salvo folder_id.</td>
           </tr>
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
@@ -335,6 +345,75 @@
 
         <h4>Example Response</h4>
         <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="files-clientFiles">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/client-files</code>
+        </div>
+        <p class="endpoint-desc">Lista los archivos de un cliente (mismas ramas y semantica que GET /files?client_id={id}). Staff: rama &#039;client&#039; del modelo core con root files (folder_id&lt;=0) a menos que folder_id entre a una carpeta. Cliente: forzado a su propio client_id con context_type=&#039;client_portal&#039;.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>page</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by page</td>
+              </tr>
+              <tr>
+                <td><code>limit</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by limit</td>
+              </tr>
+              <tr>
+                <td><code>folder_id</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by folder id</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by search</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/client-files \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="files-clientFileStats">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/client-file-stats</code>
+        </div>
+        <p class="endpoint-desc">Cuenta TODOS los archivos de un cliente (context=&#039;client&#039; AND client_id=N, sin restriccion de carpeta) via la rama &#039;client_portal_list_view&#039; del modelo core. Nota: asimetria documentada con la lista — stats incluye archivos dentro de carpetas; la lista solo muestra root files salvo folder_id.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/client-file-stats \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
 
         <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
       </div>
@@ -558,7 +637,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.12.5 &mdash; MIT License</p>
+      <p>RISE API v1.12.6 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
