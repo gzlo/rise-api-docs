@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.12.8</span>
+      RISE API <span class="version">v1.13.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -92,7 +92,7 @@
           </a>
           <a href="modules/files.html" class="sidebar-link active">
             Files
-            <span class="ep-count">12</span>
+            <span class="ep-count">14</span>
           </a>
           <a href="modules/health.html" class="sidebar-link">
             Health
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Files
     </nav>
 
-    <h1>Files <span class="badge">12 endpoints</span></h1>
+    <h1>Files <span class="badge">14 endpoints</span></h1>
     <p>Controlador de archivos y carpetas (file manager).</p>
 
     <section class="endpoints-list">
@@ -247,7 +247,17 @@
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/files/{id}/download</code></td>
-            <td>Descarga un archivo. Delega la entrega de bytes al helper protegido del core App_Controller::download_app_files() (paridad con el web UI / File_manager::_download_file) para todos los providers: - google → StreamResponse (temp file, cleanup en shutdown) - custom storage → response-&gt;download() via filtro de contenido - local → response-&gt;download() del stored name prefijado Un retorno null del core (archivo no disponible) se mapea a 404 JSON.</td>
+            <td>Descarga un archivo. Delega la entrega de bytes al helper protegido del core App_Controller::download_app_files() (paridad con el web UI / File_manager::_download_file) para todos los providers: - google → StreamResponse (temp file, cleanup en shutdown) - custom storage → response-&gt;download() via filtro de contenido - local → response-&gt;download() del stored name prefijado Un retorno null del core (objeto no recuperable) se traduce a 404 JSON provider-agnostic via StorageErrorTranslator.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/raw</code></td>
+            <td>Proxy binario: entrega el archivo inline (Content-Disposition: inline) resolviendo el objeto SOLO a traves de los hooks de storage del core. - local → StreamResponse inline si file_exists (404 si no) - google → download_app_files() → StreamResponse (404 si null) - custom → app_filter_get_file_content en try/catch → bytes inline; si vacio, resuelve la URL firmada del provider y hace un probe server-side (solo http/https, 30s, SSL verify): 200 → stream | 400 → scheme invalido | 404 | 410 | 502 | 503 No depende de presigned URLs: util cuando el link firmado expiro (TTL de DO Spaces: +7 dias).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/presigned-url</code></td>
+            <td>Devuelve una URL firmada fresca del archivo con su contrato de TTL. - custom storage: URL via app_filter_get_source_url_of_file + expires_at (now + 604800s, ISO-8601) y ttl_seconds (604800). URL vacia o fallo de resolucion -&gt; 503 storage_unavailable. - local / google: URL del core; expires_at y ttl_seconds null (sin contrato de TTL conocido).</td>
           </tr>
           <tr>
             <td><span class="method-badge method-post">POST</span></td>
@@ -444,7 +454,7 @@
           <span class="method-badge method-get">GET</span>
           <code>/api/v1/files/{id}/download</code>
         </div>
-        <p class="endpoint-desc">Descarga un archivo. Delega la entrega de bytes al helper protegido del core App_Controller::download_app_files() (paridad con el web UI / File_manager::_download_file) para todos los providers: - google → StreamResponse (temp file, cleanup en shutdown) - custom storage → response-&gt;download() via filtro de contenido - local → response-&gt;download() del stored name prefijado Un retorno null del core (archivo no disponible) se mapea a 404 JSON.</p>
+        <p class="endpoint-desc">Descarga un archivo. Delega la entrega de bytes al helper protegido del core App_Controller::download_app_files() (paridad con el web UI / File_manager::_download_file) para todos los providers: - google → StreamResponse (temp file, cleanup en shutdown) - custom storage → response-&gt;download() via filtro de contenido - local → response-&gt;download() del stored name prefijado Un retorno null del core (objeto no recuperable) se traduce a 404 JSON provider-agnostic via StorageErrorTranslator.</p>
 
         <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
 
@@ -454,6 +464,50 @@
 
         <h4>Example Request</h4>
         <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/{id}/download \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="files-raw">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/raw</code>
+        </div>
+        <p class="endpoint-desc">Proxy binario: entrega el archivo inline (Content-Disposition: inline) resolviendo el objeto SOLO a traves de los hooks de storage del core. - local → StreamResponse inline si file_exists (404 si no) - google → download_app_files() → StreamResponse (404 si null) - custom → app_filter_get_file_content en try/catch → bytes inline; si vacio, resuelve la URL firmada del provider y hace un probe server-side (solo http/https, 30s, SSL verify): 200 → stream | 400 → scheme invalido | 404 | 410 | 502 | 503 No depende de presigned URLs: util cuando el link firmado expiro (TTL de DO Spaces: +7 dias).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/raw \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="files-presignedUrl">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/presigned-url</code>
+        </div>
+        <p class="endpoint-desc">Devuelve una URL firmada fresca del archivo con su contrato de TTL. - custom storage: URL via app_filter_get_source_url_of_file + expires_at (now + 604800s, ISO-8601) y ttl_seconds (604800). URL vacia o fallo de resolucion -&gt; 503 storage_unavailable. - local / google: URL del core; expires_at y ttl_seconds null (sin contrato de TTL conocido).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/presigned-url \
   -H "Authorization: Bearer rise_your_token"</code></pre>
 
         <h4>Example Response</h4>
@@ -637,7 +691,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.12.8 &mdash; MIT License</p>
+      <p>RISE API v1.13.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
