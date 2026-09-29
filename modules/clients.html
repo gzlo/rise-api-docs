@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.13.1</span>
+      RISE API <span class="version">v1.14.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -60,7 +60,7 @@
           </a>
           <a href="modules/clients.html" class="sidebar-link active">
             Clients
-            <span class="ep-count">7</span>
+            <span class="ep-count">8</span>
           </a>
           <a href="modules/contacts.html" class="sidebar-link">
             Contacts
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Clients
     </nav>
 
-    <h1>Clients <span class="badge">7 endpoints</span></h1>
+    <h1>Clients <span class="badge">8 endpoints</span></h1>
     <p></p>
 
     <section class="endpoints-list">
@@ -233,6 +233,11 @@
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/clients/{id}</code></td>
             <td>Show clients</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/clients/by-email</code></td>
+            <td>Busca un usuario (cliente/contacto o staff) por email. GET /api/v1/clients/by-email?email=... Usado por la automatizacion n8n para decidir donde guardar el PDF de onboarding: si el email existe como cliente/contacto → los archivos van al cliente (client_id=N); si no existe → a mediafiles generales (context=global_files, client_id=0). client_id sera 0 para staff o cuando el email no exista. Client isolation: un token de tipo client solo resuelve emails de su propia empresa; staff/admin hacen el lookup global.</td>
           </tr>
           <tr>
             <td><span class="method-badge method-post">POST</span></td>
@@ -337,6 +342,38 @@
 
         <h4>Example Response</h4>
         <pre><code class="language-json">{"success": true, "data": {...}}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="clients-byEmail">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/clients/by-email</code>
+        </div>
+        <p class="endpoint-desc">Busca un usuario (cliente/contacto o staff) por email. GET /api/v1/clients/by-email?email=... Usado por la automatizacion n8n para decidir donde guardar el PDF de onboarding: si el email existe como cliente/contacto → los archivos van al cliente (client_id=N); si no existe → a mediafiles generales (context=global_files, client_id=0). client_id sera 0 para staff o cuando el email no exista. Client isolation: un token de tipo client solo resuelve emails de su propia empresa; staff/admin hacen el lookup global.</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>clients:read</code></p>
+
+                    <h4>Query Parameters</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>              <tr>
+                <td><code>email</code></td>
+                <td><span class="type-badge">string</span></td>
+                <td>Filter by email</td>
+              </tr>
+</tbody>
+            </table>
+
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/clients/by-email \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
 
         <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
       </div>
@@ -673,7 +710,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.13.1 &mdash; MIT License</p>
+      <p>RISE API v1.14.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
