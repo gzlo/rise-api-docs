@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-brand">
-      RISE API <span class="version">v1.14.0</span>
+      RISE API <span class="version">v1.15.0</span>
     </a>
   </div>
   <div class="sidebar-search" style="position:relative">
@@ -92,7 +92,7 @@
           </a>
           <a href="modules/files.html" class="sidebar-link active">
             Files
-            <span class="ep-count">14</span>
+            <span class="ep-count">16</span>
           </a>
           <a href="modules/health.html" class="sidebar-link">
             Health
@@ -214,7 +214,7 @@
       <a href="index.html">Home</a> / Files
     </nav>
 
-    <h1>Files <span class="badge">14 endpoints</span></h1>
+    <h1>Files <span class="badge">16 endpoints</span></h1>
     <p>Controlador de archivos y carpetas (file manager).</p>
 
     <section class="endpoints-list">
@@ -248,6 +248,16 @@
             <td><span class="method-badge method-get">GET</span></td>
             <td><code>/api/v1/files/{id}/download</code></td>
             <td>Descarga un archivo. Delega la entrega de bytes al helper protegido del core App_Controller::download_app_files() (paridad con el web UI / File_manager::_download_file) para todos los providers: - google → StreamResponse (temp file, cleanup en shutdown) - custom storage → response-&gt;download() via filtro de contenido - local → response-&gt;download() del stored name prefijado Un retorno null del core (objeto no recuperable) se traduce a 404 JSON provider-agnostic via StorageErrorTranslator.</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/download-token</code></td>
+            <td>Emite una URL firmada de UN SOLO USO (TTL 300s) para descargar el binario sin Bearer. Pensada para clientes MCP sin filesystem (Claude Code/Studio, Cloudflare Workers): la URL publica api/v1/files/{id}/download/{token} entrega el binario para cualquier provider (local, google, custom storage).</td>
+          </tr>
+          <tr>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td><code>/api/v1/files/download-by-token</code></td>
+            <td>Entrega el binario de un archivo validando un token de un solo uso. PUBLICO: no requiere login_user (la exencion de auth vive en BaseController::isPublicRoute()). Mismo patron de entrega que download() para todos los providers (local, google, custom storage).</td>
           </tr>
           <tr>
             <td><span class="method-badge method-get">GET</span></td>
@@ -471,6 +481,50 @@
 
         <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
       </div>
+      <div class="endpoint-detail" id="files-downloadToken">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/download-token</code>
+        </div>
+        <p class="endpoint-desc">Emite una URL firmada de UN SOLO USO (TTL 300s) para descargar el binario sin Bearer. Pensada para clientes MCP sin filesystem (Claude Code/Studio, Cloudflare Workers): la URL publica api/v1/files/{id}/download/{token} entrega el binario para cualquier provider (local, google, custom storage).</p>
+
+        <h4>Required Scopes</h4><p class="scopes"><code>files:read</code></p>
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/download-token \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        <p><span class="restriction-badge">Client restricted</span> Staff and admin only. Clients cannot access this endpoint.</p>
+      </div>
+      <div class="endpoint-detail" id="files-downloadByToken">
+        <div class="endpoint-header">
+          <span class="method-badge method-get">GET</span>
+          <code>/api/v1/files/download-by-token</code>
+        </div>
+        <p class="endpoint-desc">Entrega el binario de un archivo validando un token de un solo uso. PUBLICO: no requiere login_user (la exencion de auth vive en BaseController::isPublicRoute()). Mismo patron de entrega que download() para todos los providers (local, google, custom storage).</p>
+
+        
+
+        
+
+        
+
+        <h4>Example Request</h4>
+        <pre><code class="language-bash">curl -X GET https://your-rise.com/api/v1/files/download-by-token \
+  -H "Authorization: Bearer rise_your_token"</code></pre>
+
+        <h4>Example Response</h4>
+        <pre><code class="language-json">{}</code></pre>
+
+        
+      </div>
       <div class="endpoint-detail" id="files-raw">
         <div class="endpoint-header">
           <span class="method-badge method-get">GET</span>
@@ -691,7 +745,7 @@
 
     </section>
     <footer class="footer">
-      <p>RISE API v1.14.0 &mdash; MIT License</p>
+      <p>RISE API v1.15.0 &mdash; MIT License</p>
       <p>Documentation auto-generated from source code.</p>
     </footer>
     </div>
